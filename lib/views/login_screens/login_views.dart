@@ -28,13 +28,11 @@ class _LoginViewState extends State<LoginView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FittedBox(
-                child: Container(
-                  child: Image(
-                    fit: BoxFit.fill,
-                    width: displayWidth(context) * 0.5,
-                    image: AssetImage(
-                      "assets/password_code.png",
-                    ),
+                child: Image(
+                  fit: BoxFit.fill,
+                  width: displayWidth(context) * 0.5,
+                  image: AssetImage(
+                    "assets/password_code.png",
                   ),
                 ),
               ),
@@ -42,14 +40,12 @@ class _LoginViewState extends State<LoginView> {
                 height: 50,
               ),
               FittedBox(
-                child: Container(
-                  child: Text(
-                    "TELEFON NUMARASI",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.0),
-                  ),
+                child: Text(
+                  "TELEFON NUMARASI",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.0),
                 ),
               ),
               SizedBox(

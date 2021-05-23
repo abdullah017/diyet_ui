@@ -1,3 +1,4 @@
+import 'package:fit_diyet/helpers/size_settings.dart';
 import 'package:fit_diyet/views/home/home.dart';
 import 'package:fit_diyet/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -16,26 +17,29 @@ class _AccountInfoState extends State<AccountInfo> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'FİT DİYET',
       home: Scaffold(
         appBar: CustomAppBar(),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: Container(
-                  child: Image(
-                    fit: BoxFit.cover,
-                    width: 150,
-                    image: AssetImage(
-                      "assets/password_code.png",
+              Expanded(
+                child: SingleChildScrollView(
+                  child: FittedBox(
+                    child: Image(
+                      fit: BoxFit.contain,
+                      width: displayWidth(context) * 0.5,
+                      image: AssetImage(
+                        "assets/password_code.png",
+                      ),
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                height: 15,
+                height: 20,
               ),
               Container(
                 child: Text(
