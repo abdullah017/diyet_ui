@@ -1,3 +1,4 @@
+import 'package:fit_diyet/helpers/size_settings.dart';
 import 'package:fit_diyet/views/account/account_info.dart';
 import 'package:fit_diyet/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -21,30 +22,34 @@ class _LoginViewState extends State<LoginView> {
       title: 'FİT DİYET',
       home: Scaffold(
         appBar: CustomAppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                child: Image(
-                  fit: BoxFit.cover,
-                  width: 150,
-                  image: AssetImage(
-                    "assets/password_code.png",
+              FittedBox(
+                child: Container(
+                  child: Image(
+                    fit: BoxFit.fill,
+                    width: displayWidth(context) * 0.5,
+                    image: AssetImage(
+                      "assets/password_code.png",
+                    ),
                   ),
                 ),
               ),
               SizedBox(
                 height: 50,
               ),
-              Container(
-                child: Text(
-                  "TELEFON NUMARASI",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.0),
+              FittedBox(
+                child: Container(
+                  child: Text(
+                    "TELEFON NUMARASI",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0),
+                  ),
                 ),
               ),
               SizedBox(
@@ -90,7 +95,9 @@ class _LoginViewState extends State<LoginView> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Spacer(),
+              SizedBox(
+                height: 50,
+              ),
               Expanded(
                 flex: 0,
                 child: ElevatedButton(
@@ -125,18 +132,18 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  void getPhoneNumber(String phoneNumber) async {
-    PhoneNumber number =
-        await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber, 'TR');
+//   void getPhoneNumber(String phoneNumber) async {
+//     PhoneNumber number =
+//         await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber, 'TR');
 
-    setState(() {
-      this.number = number;
-    });
-  }
+//     setState(() {
+//       this.number = number;
+//     });
+//   }
 
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     controller?.dispose();
+//     super.dispose();
+//   }
 }
