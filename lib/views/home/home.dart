@@ -78,7 +78,7 @@ class HomeView extends StatelessWidget {
                       child: Center(
                         child: TextButton(
                           onPressed: () {
-                            print('BANA BASTIN');
+                            print('BANA BASTINmmasdfasd');
                           },
                           child: Text(
                             "Kategorini\nSeç\nHemen Başla",
@@ -92,28 +92,6 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 18.0),
-                  //   child: Row(
-                  //     children: <Widget>[
-                  //       Text(
-                  //         "Top Doctor",
-                  //       ),
-                  //       Spacer(),
-                  //       TextButton(
-                  //         onPressed: () {
-                  //           Navigator.push(
-                  //               context,
-                  //               MaterialPageRoute(
-                  //                   builder: (context) => HomeView()));
-                  //         },
-                  //         child: Text(
-                  //           "View all",
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
                   SizedBox(height: 15),
                   Expanded(
                     flex: 0,
