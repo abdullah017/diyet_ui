@@ -91,27 +91,30 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
               Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  //formKey.currentState.save();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AccountInfo()));
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.red),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(
-                        color: Colors.red,
+              Expanded(
+                flex: 0,
+                child: ElevatedButton(
+                  onPressed: () {
+                    //formKey.currentState.save();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AccountInfo()));
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Colors.red,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                child: Text(
-                  "Kodu Gönder",
-                  style: TextStyle(
-                    fontSize: 20.0,
+                  child: Text(
+                    "Kodu Gönder",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
                   ),
                 ),
               )

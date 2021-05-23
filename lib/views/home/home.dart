@@ -115,30 +115,34 @@ class HomeView extends StatelessWidget {
                   //   ),
                   // ),
                   SizedBox(height: 15),
-                  Container(
-                    width: double.infinity,
-                    height: 200.0,
-                    child: ListView.builder(
-                      itemCount: doctorList.length,
-                      scrollDirection: Axis.horizontal,
-                      physics: ScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        var doctor = doctorList[index];
+                  Expanded(
+                    flex: 0,
+                    child: Container(
+                      width: double.infinity,
+                      height: 200.0,
+                      child: ListView.builder(
+                        itemCount: doctorList.length,
+                        scrollDirection: Axis.horizontal,
+                        physics: ScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var doctor = doctorList[index];
 
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => DiyetisyenListViewDetail(
-                                  doctorModel: doctorList[index],
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DiyetisyenListViewDetail(
+                                    doctorModel: doctorList[index],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                          child: DoctorCard(doctor: doctor),
-                        );
-                      },
+                              );
+                            },
+                            child: DoctorCard(doctor: doctor),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
