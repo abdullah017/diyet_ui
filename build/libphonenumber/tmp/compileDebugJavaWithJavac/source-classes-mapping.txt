@@ -1,0 +1,5 @@
+com/mathrawk/libphonenumber/BuildConfig.java
+ com.mathrawk.libphonenumber.BuildConfig
+com/codeheadlabs/libphonenumber/LibphonenumberPlugin.java
+ com.codeheadlabs.libphonenumber.LibphonenumberPlugin
+ com.codeheadlabs.libphonenumber.LibphonenumberPlugin$1

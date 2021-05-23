@@ -1,0 +1,4 @@
+com/example/libphonenumber_plugin/BuildConfig.java
+ com.example.libphonenumber_plugin.BuildConfig
+com/example/libphonenumber_plugin/LibphonenumberPlugin.java
+ com.example.libphonenumber_plugin.LibphonenumberPlugin

@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/example/fit_diyet/BuildConfig.java
+ com.example.fit_diyet.BuildConfig
