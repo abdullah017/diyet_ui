@@ -1,4 +1,4 @@
-import 'package:fit_diyet/helpers/size_settings.dart';
+
 import 'package:fit_diyet/model/doctor_model.dart';
 import 'package:fit_diyet/views/doctor/doctor_detail.dart';
 import 'package:flutter/material.dart';
@@ -38,27 +38,29 @@ class _CategoriesViewState extends State<CategoriesView> {
         padding: const EdgeInsets.symmetric(horizontal: 0.0),
         child: Column(
           children: [
-            ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              itemCount: doctorList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => DiyetisyenListViewDetail(
-                          doctorModel: doctorList[index],
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemCount: doctorList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => DiyetisyenListViewDetail(
+                            doctorModel: doctorList[index],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  child: _buildPlayerModelList(
-                    doctorList[index],
-                  ),
-                );
-              },
+                      );
+                    },
+                    child: _buildPlayerModelList(
+                      doctorList[index],
+                    ),
+                  );
+                },
+              ),
             ),
             SizedBox(
               height: 10,
