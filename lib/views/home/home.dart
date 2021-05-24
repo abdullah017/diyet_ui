@@ -66,32 +66,30 @@ class HomeView extends StatelessWidget {
                   width: displayWidth(context),
                   height: displayHeight(context) * 0.2,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
                     shape: BoxShape.rectangle,
                     border: Border.all(
                       color: Color(0xff69C7B7),
                     ),
+                    borderRadius: BorderRadius.circular(20),
                     color: Color(0xff69C7B7),
                     //borderRadius: BorderRadius.circular(100),
                   ),
-                  child: Center(
-                    child: TextButton(
-                      onPressed: () {
-                        print('BANA BASTINmmasdfasd');
-                      },
-                      child: Text(
-                        "Kategorini Seç\nHemen Başla",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+                  child: TextButton(
+                    onPressed: () {
+                      print('BANA BASTINmmasdfasd');
+                    },
+                    child: Text(
+                      "Kategorini Seç\nHemen Başla",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 25),
+              SizedBox(height: 50),
               Expanded(
                 flex: 0,
                 child: Container(

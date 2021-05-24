@@ -27,13 +27,11 @@ class _LoginViewState extends State<LoginView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(
-                child: Image(
-                  fit: BoxFit.fill,
-                  width: displayWidth(context) * 0.5,
-                  image: AssetImage(
-                    "assets/password_code.png",
-                  ),
+              Image(
+                fit: BoxFit.fill,
+                width: displayWidth(context) * 0.5,
+                image: AssetImage(
+                  "assets/password_code.png",
                 ),
               ),
               SizedBox(
