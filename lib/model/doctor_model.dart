@@ -1,6 +1,7 @@
 class Doctor {
   final String name;
   final String specialist;
+  final String about;
   final double rating;
   final String reviews;
   final String academy;
@@ -8,6 +9,7 @@ class Doctor {
   Doctor(
       {this.academy,
       this.name,
+      this.about,
       this.rating,
       this.reviews,
       this.specialist,
@@ -56,6 +58,8 @@ List<Consultation> consultationList = [
 List<Doctor> doctorList = [
   Doctor(
       name: "Dyt. Dilan Kara",
+      about:
+          " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit hendrerit nulla ut viverra. Phasellus consectetur tellus tortor, vitae elementum nibh tincidunt sed. Sed in ex sit amet lacus tempus congue ullamcorper vel nisi. Nunc nec vulputate quam. Fusce porttitor consectetur augue et commodo. Vivamus a mauris leo. Vestibulum id faucibus sapien, quis tincidunt libero. Mauris vel eleifend massa, nec gravida felis. Vivamus vel blandit est, sed euismod justo. Morbi eget libero ligula. Vivamus leo ipsum, placerat eget auctor sed, semper nec arcu. Duis ultricies pulvinar tellus sed vestibulum. Donec blandit tempor neque ut mattis. Vivamus facilisis quis justo vel gravida. Mauris congue vestibulum mauris, et malesuada lectus aliquet ac. ",
       rating: 4.0,
       reviews: "80",
       specialist: "Diyabet ve diğer hastalıklarda beslenme",
@@ -64,6 +68,8 @@ List<Doctor> doctorList = [
           "assets/5-Ways-to-Help-Employees-Choose-the-Right-Primary-Care-Doctor--e1543342970537.jpg"),
   Doctor(
       name: "Uzm.Dyt. Mahmut Ak",
+      about:
+          " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit hendrerit nulla ut viverra. Phasellus consectetur tellus tortor, vitae elementum nibh tincidunt sed. Sed in ex sit amet lacus tempus congue ullamcorper vel nisi. Nunc nec vulputate quam. Fusce porttitor consectetur augue et commodo. Vivamus a mauris leo. Vestibulum id faucibus sapien, quis tincidunt libero. Mauris vel eleifend massa, nec gravida felis. Vivamus vel blandit est, sed euismod justo. Morbi eget libero ligula. Vivamus leo ipsum, placerat eget auctor sed, semper nec arcu. Duis ultricies pulvinar tellus sed vestibulum. Donec blandit tempor neque ut mattis. Vivamus facilisis quis justo vel gravida. Mauris congue vestibulum mauris, et malesuada lectus aliquet ac. ",
       rating: 4.0,
       reviews: "27",
       specialist: "Bariatrik cerrahi sonrası beslenme",
@@ -71,6 +77,8 @@ List<Doctor> doctorList = [
       image: "assets/92019175-happy-doctor-with-clipboard-at-clinic.jpg"),
   Doctor(
       name: "Dyt. Feride Karpınar",
+      about:
+          " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit hendrerit nulla ut viverra. Phasellus consectetur tellus tortor, vitae elementum nibh tincidunt sed. Sed in ex sit amet lacus tempus congue ullamcorper vel nisi. Nunc nec vulputate quam. Fusce porttitor consectetur augue et commodo. Vivamus a mauris leo. Vestibulum id faucibus sapien, quis tincidunt libero. Mauris vel eleifend massa, nec gravida felis. Vivamus vel blandit est, sed euismod justo. Morbi eget libero ligula. Vivamus leo ipsum, placerat eget auctor sed, semper nec arcu. Duis ultricies pulvinar tellus sed vestibulum. Donec blandit tempor neque ut mattis. Vivamus facilisis quis justo vel gravida. Mauris congue vestibulum mauris, et malesuada lectus aliquet ac. ",
       rating: 4.9,
       reviews: "27",
       specialist: "Vejeteryan beslenme",
@@ -78,6 +86,8 @@ List<Doctor> doctorList = [
       image: "assets/doctor-in-branding-article.jpg"),
   Doctor(
       name: "Dyt. Şeyma Erbaş",
+      about:
+          " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit hendrerit nulla ut viverra. Phasellus consectetur tellus tortor, vitae elementum nibh tincidunt sed. Sed in ex sit amet lacus tempus congue ullamcorper vel nisi. Nunc nec vulputate quam. Fusce porttitor consectetur augue et commodo. Vivamus a mauris leo. Vestibulum id faucibus sapien, quis tincidunt libero. Mauris vel eleifend massa, nec gravida felis. Vivamus vel blandit est, sed euismod justo. Morbi eget libero ligula. Vivamus leo ipsum, placerat eget auctor sed, semper nec arcu. Duis ultricies pulvinar tellus sed vestibulum. Donec blandit tempor neque ut mattis. Vivamus facilisis quis justo vel gravida. Mauris congue vestibulum mauris, et malesuada lectus aliquet ac. ",
       rating: 4.5,
       reviews: "27",
       specialist: "Sağlıklı kilo alma",
@@ -85,6 +95,8 @@ List<Doctor> doctorList = [
       image: "assets/file-20191203-66986-im7o5.jpg"),
   Doctor(
       name: "Dyt. Hayley Williams",
+      about:
+          " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit hendrerit nulla ut viverra. Phasellus consectetur tellus tortor, vitae elementum nibh tincidunt sed. Sed in ex sit amet lacus tempus congue ullamcorper vel nisi. Nunc nec vulputate quam. Fusce porttitor consectetur augue et commodo. Vivamus a mauris leo. Vestibulum id faucibus sapien, quis tincidunt libero. Mauris vel eleifend massa, nec gravida felis. Vivamus vel blandit est, sed euismod justo. Morbi eget libero ligula. Vivamus leo ipsum, placerat eget auctor sed, semper nec arcu. Duis ultricies pulvinar tellus sed vestibulum. Donec blandit tempor neque ut mattis. Vivamus facilisis quis justo vel gravida. Mauris congue vestibulum mauris, et malesuada lectus aliquet ac. ",
       rating: 4.9,
       reviews: "27",
       specialist: "Cardiologist",
@@ -92,6 +104,8 @@ List<Doctor> doctorList = [
       image: "assets/file-20191203-66986-im7o5.jpg"),
   Doctor(
       name: "Dyt. Sakura Miyawaki",
+      about:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit hendrerit nulla ut viverra. Phasellus consectetur tellus tortor, vitae elementum nibh tincidunt sed. Sed in ex sit amet lacus tempus congue ullamcorper vel nisi. Nunc nec vulputate quam. Fusce porttitor consectetur augue et commodo. Vivamus a mauris leo. Vestibulum id faucibus sapien, quis tincidunt libero. Mauris vel eleifend massa, nec gravida felis. Vivamus vel blandit est, sed euismod justo. Morbi eget libero ligula. Vivamus leo ipsum, placerat eget auctor sed, semper nec arcu. Duis ultricies pulvinar tellus sed vestibulum. Donec blandit tempor neque ut mattis. Vivamus facilisis quis justo vel gravida. Mauris congue vestibulum mauris, et malesuada lectus aliquet ac.",
       rating: 4.9,
       reviews: "27",
       specialist: "Cardiologist",
