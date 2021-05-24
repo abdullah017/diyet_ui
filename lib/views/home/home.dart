@@ -1,5 +1,6 @@
 import 'package:fit_diyet/helpers/size_settings.dart';
 import 'package:fit_diyet/model/doctor_model.dart';
+import 'package:fit_diyet/views/categories/categories.dart';
 import 'package:fit_diyet/views/doctor/doctor_detail.dart';
 import 'package:fit_diyet/widgets/doctor_card.dart';
 import 'package:fit_diyet/widgets/home_custom_appbar.dart';
@@ -124,6 +125,12 @@ class HomeView extends StatelessWidget {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CategoriesView(),
+                        ),
+                      );
                       print('BANA BASTINmmasdfasd');
                     },
                     child: Text(

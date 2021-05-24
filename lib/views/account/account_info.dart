@@ -142,9 +142,11 @@ class _AccountInfoState extends State<AccountInfo> {
                         onPressed: () {
                           //formKey.currentState.save();
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeView()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeView(),
+                            ),
+                          );
                         },
                         style: ButtonStyle(
                           backgroundColor:
