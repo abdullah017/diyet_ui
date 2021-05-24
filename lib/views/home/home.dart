@@ -12,7 +12,55 @@ class HomeView extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       home: Scaffold(
-        appBar: HomeAppBar(),
+        appBar: AppBar(
+          elevation: 0,
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {
+                showModalBottomSheet<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Column(
+                      children: [
+                        bildirimler(
+                          "RANDEVUNUZ OLUŞTURULDU",
+                          "3 dk önce",
+                        ),
+                        bildirimler(
+                          "RANDEVUNUZ OLUŞTURULDU",
+                          "3 dk önce",
+                        ),
+                        bildirimler(
+                          "RANDEVUNUZ OLUŞTURULDU",
+                          "3 dk önce",
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              color: Colors.black,
+            ),
+          ],
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(
+                Icons.menu_rounded,
+                color: Colors.black,
+              ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
+          title: Text(
+            "FİT DİYET",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+        ),
         drawer: Drawer(),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(8.0),
@@ -122,6 +170,26 @@ class HomeView extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Padding bildirimler(String mesaj, gecenSure) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            mesaj,
+            style: TextStyle(
+              fontSize: 15.0,
+            ),
+          ),
+          Text(
+            gecenSure,
+          ),
+        ],
       ),
     );
   }
