@@ -55,7 +55,7 @@ class _CategoriesViewState extends State<CategoriesView> {
                         ),
                       );
                     },
-                    child: _buildPlayerModelList(
+                    child: _buildCategoriesList(
                       doctorList[index],
                     ),
                   );
@@ -71,7 +71,7 @@ class _CategoriesViewState extends State<CategoriesView> {
     );
   }
 
-  Widget _buildPlayerModelList(Doctor items) {
+  Widget _buildCategoriesList(Doctor items) {
     return Card(
       margin: EdgeInsets.all(8.0),
       elevation: 50,

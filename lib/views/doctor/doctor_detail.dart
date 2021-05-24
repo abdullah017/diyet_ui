@@ -1,12 +1,17 @@
 import 'package:fit_diyet/helpers/size_settings.dart';
 import 'package:fit_diyet/model/doctor_model.dart';
+import 'package:fit_diyet/model/seance_model.dart';
+
+import 'package:fit_diyet/widgets/seance_list.dart';
 import 'package:flutter/material.dart';
 
 /// [Detay Sayfası]
 class DiyetisyenListViewDetail extends StatefulWidget {
   final Doctor doctorModel;
+  final Seance seanceModel;
 
-  const DiyetisyenListViewDetail({Key key, this.doctorModel}) : super(key: key);
+  const DiyetisyenListViewDetail({Key key, this.doctorModel, this.seanceModel})
+      : super(key: key);
 
   @override
   _DiyetisyenListViewDetailState createState() =>
@@ -15,6 +20,7 @@ class DiyetisyenListViewDetail extends StatefulWidget {
 
 class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
   Doctor doctorModel;
+  Seance seanceModel;
 
   bool isFavori = false;
   Color favoriColor = Colors.white;
@@ -32,6 +38,7 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
   @override
   void initState() {
     doctorModel = widget.doctorModel;
+    seanceModel = widget.seanceModel;
     super.initState();
   }
 
@@ -250,7 +257,7 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                     SizedBox(
                       width: displayWidth(context) * 0.9,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: _showMaterialDialog,
                         child: Text(
                           'Seans Ücretleri',
                           style: TextStyle(color: Colors.orange),
@@ -291,5 +298,45 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
         ),
       ),
     );
+  }
+
+  _showMaterialDialog() {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+              title: new Text("Seanslar"),
+              content: Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: seanceList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => DiyetisyenListViewDetail(
+                              seanceModel: seanceList[index],
+                            ),
+                          ),
+                        );
+                      },
+                      child: buildSeancesList(
+                        seanceList[index],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              actions: <Widget>[
+                ElevatedButton(
+                  child: Text('Close me!'),
+                  onPressed: () {
+                    Navigator.pop(_);
+                  },
+                )
+              ],
+            ));
   }
 }
