@@ -3,7 +3,6 @@ import 'package:fit_diyet/model/doctor_model.dart';
 import 'package:fit_diyet/views/categories/categories.dart';
 import 'package:fit_diyet/views/doctor/doctor_detail.dart';
 import 'package:fit_diyet/widgets/doctor_card.dart';
-import 'package:fit_diyet/widgets/home_custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {

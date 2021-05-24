@@ -41,33 +41,27 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              'FİT DİYET',
+              style: TextStyle(color: Colors.black),
+            ),
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+            iconTheme: IconThemeData(
+              color: Colors.black,
+            ),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+          ),
           body: SingleChildScrollView(
             padding: EdgeInsets.all(10.0),
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                      height: 50,
-                      width: 50,
-                      child: IconButton(
-                          icon: Icon(Icons.arrow_back_ios),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black54),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                    ),
-                    Text(
-                      'FİT DİYET',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Container(height: 24, width: 24),
-                  ],
-                ),
                 SizedBox(
                   height: 15,
                 ),
