@@ -141,7 +141,7 @@ class _AccountInfoState extends State<AccountInfo> {
                       ElevatedButton(
                         onPressed: () {
                           //formKey.currentState.save();
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => HomeView(),

@@ -1,7 +1,8 @@
 import 'package:fit_diyet/helpers/size_settings.dart';
 import 'package:fit_diyet/model/doctor_model.dart';
 import 'package:fit_diyet/model/seance_model.dart';
-
+import 'package:fit_diyet/views/payment/payment.dart';
+import 'package:fit_diyet/widgets/arrow_back_appbar.dart';
 import 'package:fit_diyet/widgets/seance_list.dart';
 import 'package:flutter/material.dart';
 
@@ -48,23 +49,7 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              'FİT DİYET',
-              style: TextStyle(color: Colors.black),
-            ),
-            leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-            iconTheme: IconThemeData(
-              color: Colors.black,
-            ),
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-          ),
+          appBar: arrowBackAppBar(context),
           body: SingleChildScrollView(
             padding: EdgeInsets.all(10.0),
             child: Column(
@@ -202,10 +187,6 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                 SizedBox(
                   height: 25,
                 ),
-                // Text(
-                //   "HAKKINDA",
-                //   style: TextStyle(color: Colors.black, fontSize: 20),
-                // ),
                 SizedBox(
                   height: 15,
                 ),
@@ -257,7 +238,7 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                     SizedBox(
                       width: displayWidth(context) * 0.9,
                       child: ElevatedButton(
-                        onPressed: _showMaterialDialog,
+                        onPressed: showSeanceDialog,
                         child: Text(
                           'Seans Ücretleri',
                           style: TextStyle(color: Colors.orange),
@@ -300,43 +281,49 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
     );
   }
 
-  _showMaterialDialog() {
+// *! SHOWDIALOG METOD HERE!
+
+  showSeanceDialog() {
     showDialog(
         context: context,
-        builder: (_) => new AlertDialog(
-              title: new Text("Seanslar"),
-              content: Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: seanceList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => DiyetisyenListViewDetail(
-                              seanceModel: seanceList[index],
+        builder: (_) => SizedBox(
+              child: AlertDialog(
+                title: new Text("Seanslar"),
+                content: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: seanceList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PaymentViews(
+                                paymentInfo: seanceModel.month,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      child: buildSeancesList(
-                        seanceList[index],
-                      ),
-                    );
-                  },
+                          );
+                          print("GELEN VERİ => ${seanceModel.month[index]}");
+                        },
+                        child: buildSeancesList(
+                          seanceList[index],
+                        ),
+                      );
+                    },
+                  ),
                 ),
+                actions: <Widget>[
+                  ElevatedButton(
+                    child: Text('Kapat'),
+                    onPressed: () {
+                      Navigator.pop(_);
+                    },
+                  )
+                ],
               ),
-              actions: <Widget>[
-                ElevatedButton(
-                  child: Text('Close me!'),
-                  onPressed: () {
-                    Navigator.pop(_);
-                  },
-                )
-              ],
             ));
   }
 }

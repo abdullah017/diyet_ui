@@ -97,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
                 child: ElevatedButton(
                   onPressed: () {
                     //formKey.currentState.save();
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => AccountInfo()));
                   },
                   style: ButtonStyle(
