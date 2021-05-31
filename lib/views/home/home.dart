@@ -1,11 +1,39 @@
+import 'dart:convert';
+import 'package:fit_diyet/api/api.dart';
 import 'package:fit_diyet/helpers/size_settings.dart';
-import 'package:fit_diyet/model/doctor_model.dart';
+import 'package:fit_diyet/model/diyetisyen_model.dart';
 import 'package:fit_diyet/views/categories/categories.dart';
 import 'package:fit_diyet/views/doctor/doctor_detail.dart';
 import 'package:fit_diyet/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  // ignore: deprecated_member_use
+  var users = List<Diyetisyen>();
+
+  _getUsers() {
+    API.getUsers().then((response) {
+      setState(() {
+        Iterable list = json.decode(response.body);
+        users = list.map((model) => Diyetisyen.fromJson(model)).toList();
+      });
+    });
+  }
+
+  initState() {
+    super.initState();
+    _getUsers();
+  }
+
+  dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -150,27 +178,25 @@ class HomeView extends StatelessWidget {
                   width: double.infinity,
                   height: 200.0,
                   child: ListView.builder(
-                    itemCount: doctorList.length,
-                    scrollDirection: Axis.horizontal,
-                    physics: ScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      var doctor = doctorList[index];
-
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => DiyetisyenListViewDetail(
-                                doctorModel: doctorList[index],
+                      itemCount: users.length,
+                      scrollDirection: Axis.horizontal,
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        var diyetisyen = users[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => DiyetisyenListViewDetail(
+                                  diyetisyen: users[index],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: DoctorCard(doctor: doctor),
-                      );
-                    },
-                  ),
+                            );
+                          },
+                          child: DoctorCard(diyetisyen: diyetisyen),
+                        );
+                      }),
                 ),
               ),
             ],

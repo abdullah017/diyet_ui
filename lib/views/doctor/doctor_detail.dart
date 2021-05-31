@@ -1,4 +1,5 @@
 import 'package:fit_diyet/helpers/size_settings.dart';
+import 'package:fit_diyet/model/diyetisyen_model.dart';
 import 'package:fit_diyet/model/doctor_model.dart';
 import 'package:fit_diyet/model/seance_model.dart';
 import 'package:fit_diyet/views/payment/payment.dart';
@@ -9,9 +10,11 @@ import 'package:flutter/material.dart';
 /// [Detay Sayfası]
 class DiyetisyenListViewDetail extends StatefulWidget {
   final Doctor doctorModel;
+  final Diyetisyen diyetisyen;
   final Seance seanceModel;
 
-  const DiyetisyenListViewDetail({Key key, this.doctorModel, this.seanceModel})
+  const DiyetisyenListViewDetail(
+      {Key key, this.doctorModel, this.seanceModel, this.diyetisyen})
       : super(key: key);
 
   @override
@@ -22,6 +25,7 @@ class DiyetisyenListViewDetail extends StatefulWidget {
 class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
   Doctor doctorModel;
   Seance seanceModel;
+  Diyetisyen diyetisyenModel;
 
   bool isFavori = false;
   Color favoriColor = Colors.white;
@@ -40,6 +44,7 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
   void initState() {
     doctorModel = widget.doctorModel;
     seanceModel = widget.seanceModel;
+    diyetisyenModel = widget.diyetisyen;
     super.initState();
   }
 
@@ -88,8 +93,8 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                                   child: CircleAvatar(
                                     backgroundColor: Colors.green[500],
                                     radius: 40,
-                                    backgroundImage: AssetImage(
-                                      doctorModel.image,
+                                    backgroundImage: NetworkImage(
+                                      diyetisyenModel.profilFotografi,
                                     ),
                                   ),
                                 ),
@@ -99,7 +104,7 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                               height: 5,
                             ),
                             Text(
-                              doctorModel.name,
+                              diyetisyenModel.adi.toUpperCase(),
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
@@ -110,7 +115,7 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                               height: 10,
                             ),
                             Text(
-                              doctorModel.specialist,
+                              diyetisyenModel.kategori,
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.white54,
@@ -218,7 +223,7 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                               height: 10,
                             ),
                             Text(
-                              doctorModel.about,
+                              diyetisyenModel.hakkimda,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 15,
