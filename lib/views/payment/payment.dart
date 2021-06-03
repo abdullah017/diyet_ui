@@ -1,5 +1,5 @@
 import 'package:fit_diyet/model/seance_model.dart';
-import 'package:fit_diyet/widgets/arrow_back_appbar.dart';
+import 'package:fit_diyet/widgets/appbar/arrow_back_appbar.dart';
 import 'package:flutter/material.dart';
 
 class PaymentViews extends StatefulWidget {

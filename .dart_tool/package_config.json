@@ -8,6 +8,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "bloc",
+      "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/bloc-7.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0",
       "packageUri": "lib/",
@@ -62,6 +68,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_bloc",
+      "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/flutter_bloc-7.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_form_builder",
+      "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/flutter_form_builder-6.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_localizations",
+      "rootUri": "file:///opt/flutter/packages/flutter_localizations",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///opt/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -82,6 +106,12 @@
     {
       "name": "http_parser",
       "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "intl",
+      "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -140,6 +170,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
       "packageUri": "lib/",
@@ -154,6 +190,12 @@
     {
       "name": "plugin_platform_interface",
       "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/provider-5.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -218,7 +260,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-05-31T12:04:11.817960Z",
+  "generated": "2021-06-02T16:28:07.597678Z",
   "generator": "pub",
   "generatorVersion": "2.13.0"
 }

@@ -1,10 +1,14 @@
 import 'dart:convert';
-import 'package:fit_diyet/api/api.dart';
 import 'package:fit_diyet/helpers/size_settings.dart';
 import 'package:fit_diyet/model/diyetisyen_model.dart';
+import 'package:fit_diyet/api/service/diyetisyen_service.dart';
+
 import 'package:fit_diyet/views/categories/categories.dart';
 import 'package:fit_diyet/views/doctor/doctor_detail.dart';
+import 'package:fit_diyet/views/drawers/profil_page.dart';
 import 'package:fit_diyet/widgets/doctor_card.dart';
+import 'package:fit_diyet/widgets/drawer/drawer_header.dart';
+import 'package:fit_diyet/widgets/drawer/drawer_item.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -14,20 +18,21 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   // ignore: deprecated_member_use
-  var users = List<Diyetisyen>();
+  var diyetisyenler = List<Diyetisyen>();
 
-  _getUsers() {
-    API.getUsers().then((response) {
+  _getDiyetisyen() {
+    DiyetisyenService.getDiyetisyenler().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-        users = list.map((model) => Diyetisyen.fromJson(model)).toList();
+        diyetisyenler =
+            list.map((model) => Diyetisyen.fromJson(model)).toList();
       });
     });
   }
 
   initState() {
     super.initState();
-    _getUsers();
+    _getDiyetisyen();
   }
 
   dispose() {
@@ -89,7 +94,44 @@ class _HomeViewState extends State<HomeView> {
           ),
           backgroundColor: Colors.transparent,
         ),
-        drawer: Drawer(),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              createHeader(),
+              createDrawerItem(
+                icon: Icons.person,
+                text: 'Profilim',
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProfilPage(),
+                    ),
+                  );
+                },
+              ),
+              createDrawerItem(
+                icon: Icons.event,
+                text: 'Diyet Listelerim',
+              ),
+              createDrawerItem(
+                icon: Icons.format_list_numbered,
+                text: 'Tarfilerim',
+              ),
+              Divider(),
+              createDrawerItem(icon: Icons.straighten, text: 'Ölçümlerim'),
+              createDrawerItem(icon: Icons.event, text: 'Randevularım'),
+              createDrawerItem(icon: Icons.message, text: 'Mesajlarım'),
+              createDrawerItem(icon: Icons.settings, text: 'Ayarlar'),
+              Divider(),
+              createDrawerItem(icon: Icons.bug_report, text: 'Hata bildirin'),
+              ListTile(
+                title: Text('0.0.1'),
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(8.0),
           child: Column(
@@ -178,18 +220,18 @@ class _HomeViewState extends State<HomeView> {
                   width: double.infinity,
                   height: 200.0,
                   child: ListView.builder(
-                      itemCount: users.length,
+                      itemCount: diyetisyenler.length,
                       scrollDirection: Axis.horizontal,
                       physics: ScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        var diyetisyen = users[index];
+                        var diyetisyen = diyetisyenler[index];
                         return GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => DiyetisyenListViewDetail(
-                                  diyetisyen: users[index],
+                                  diyetisyen: diyetisyenler[index],
                                 ),
                               ),
                             );

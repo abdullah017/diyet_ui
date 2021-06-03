@@ -10,6 +10,7 @@ class DoctorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Card(
+      elevation: 5,
       margin: EdgeInsets.only(left: 18.0, bottom: 2.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
@@ -29,8 +30,7 @@ class DoctorCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12.0),
-            Text(
-              diyetisyen.adi.toUpperCase(),
+            Text(diyetisyen.adi.toUpperCase(),
                 overflow: TextOverflow.clip,
                 maxLines: 3,
                 textAlign: TextAlign.center,

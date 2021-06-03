@@ -1,6 +1,6 @@
 import 'package:fit_diyet/helpers/size_settings.dart';
 import 'package:fit_diyet/views/account/account_info.dart';
-import 'package:fit_diyet/widgets/custom_appbar.dart';
+import 'package:fit_diyet/widgets/appbar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 

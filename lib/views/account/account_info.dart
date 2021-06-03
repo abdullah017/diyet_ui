@@ -1,6 +1,6 @@
 import 'package:fit_diyet/helpers/size_settings.dart';
 import 'package:fit_diyet/views/home/home.dart';
-import 'package:fit_diyet/widgets/custom_appbar.dart';
+import 'package:fit_diyet/widgets/appbar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class AccountInfo extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'package:fit_diyet/model/diyetisyen_model.dart';
 import 'package:fit_diyet/model/doctor_model.dart';
 import 'package:fit_diyet/model/seance_model.dart';
 import 'package:fit_diyet/views/payment/payment.dart';
-import 'package:fit_diyet/widgets/arrow_back_appbar.dart';
+import 'package:fit_diyet/widgets/appbar/arrow_back_appbar.dart';
 import 'package:fit_diyet/widgets/seance_list.dart';
 import 'package:flutter/material.dart';
 

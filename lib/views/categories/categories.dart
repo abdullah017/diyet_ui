@@ -1,22 +1,42 @@
+import 'dart:convert';
 
+import 'package:fit_diyet/api/service/diyetisyen_service.dart';
+import 'package:fit_diyet/model/diyetisyen_model.dart';
 import 'package:fit_diyet/model/doctor_model.dart';
 import 'package:fit_diyet/views/doctor/doctor_detail.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesView extends StatefulWidget {
-  final Doctor doctorModel;
+  final Diyetisyen diyetisyenModel;
 
-  const CategoriesView({Key key, this.doctorModel}) : super(key: key);
+  const CategoriesView({Key key, this.diyetisyenModel}) : super(key: key);
   @override
   _CategoriesViewState createState() => _CategoriesViewState();
 }
 
 class _CategoriesViewState extends State<CategoriesView> {
-  Doctor doctorModel;
-  @override
-  void initState() {
-    doctorModel = widget.doctorModel;
+  // ignore: deprecated_member_use
+  var diyetisyenler = List<Diyetisyen>();
+  Diyetisyen diyetisyenModel;
+
+  _getDiyetisyen() {
+    DiyetisyenService.getDiyetisyenler().then((response) {
+      setState(() {
+        Iterable list = json.decode(response.body);
+        diyetisyenler =
+            list.map((model) => Diyetisyen.fromJson(model)).toList();
+      });
+    });
+  }
+
+  initState() {
     super.initState();
+    _getDiyetisyen();
+    diyetisyenModel = widget.diyetisyenModel;
+  }
+
+  dispose() {
+    super.dispose();
   }
 
   @override
@@ -39,27 +59,33 @@ class _CategoriesViewState extends State<CategoriesView> {
         child: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                itemCount: doctorList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => DiyetisyenListViewDetail(
-                            doctorModel: doctorList[index],
+              child: Container(
+                width: double.infinity,
+                height: 200.0,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: diyetisyenler.length,
+                  itemBuilder: (context, index) {
+                    var diyetisyen = diyetisyenler[index];
+                    return GestureDetector(
+                      onTap: () {
+                        print("BURAYA ODAKLAN:${diyetisyenler[index]}");
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => DiyetisyenListViewDetail(
+                              diyetisyen: diyetisyen,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    child: _buildCategoriesList(
-                      doctorList[index],
-                    ),
-                  );
-                },
+                        );
+                      },
+                      child: _buildCategoriesList(
+                        diyetisyenler[index],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
             SizedBox(
@@ -71,7 +97,7 @@ class _CategoriesViewState extends State<CategoriesView> {
     );
   }
 
-  Widget _buildCategoriesList(Doctor items) {
+  Widget _buildCategoriesList(Diyetisyen items) {
     return Card(
       margin: EdgeInsets.all(8.0),
       elevation: 50,
@@ -82,13 +108,13 @@ class _CategoriesViewState extends State<CategoriesView> {
       child: ExpansionTile(
         leading: Icon(Icons.category),
         title: Text(
-          items.specialist,
+          items.kategori,
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
         ),
         children: <Widget>[
           ListTile(
             title: Text(
-              items.name,
+              "${items.adi[0].toUpperCase()}${items.adi.substring(1)} ${items.soyad[0].toUpperCase()}${items.soyad .substring(1)}",
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
           )
