@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/abdullah/Belgeler/GitHub/diyet_ui/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/home/abdullah/Belgeler/AndroiProject/diyet_ui/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/home/abdullah/Belgeler/GitHub/diyet_ui/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/abdullah/Belgeler/AndroiProject/diyet_ui/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

@@ -5,6 +5,7 @@ import 'package:fit_diyet/Models/diyetisyen_model.dart';
 import 'package:fit_diyet/Views/ui/doctor/doctor_detail.dart';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoriesView extends StatefulWidget {
   final Diyetisyen diyetisyenModel;
@@ -19,7 +20,7 @@ class _CategoriesViewState extends State<CategoriesView> {
   var diyetisyenler = List<Diyetisyen>();
   Diyetisyen diyetisyenModel;
 
-  _getDiyetisyen() {
+  _getDiyetisyen() async {
     DiyetisyenService.getDiyetisyenler().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
@@ -114,7 +115,7 @@ class _CategoriesViewState extends State<CategoriesView> {
         children: <Widget>[
           ListTile(
             title: Text(
-              "${items.adi[0].toUpperCase()}${items.adi.substring(1)} ${items.soyad[0].toUpperCase()}${items.soyad .substring(1)}",
+              "${items.adi[0].toUpperCase()}${items.adi.substring(1)} ${items.soyad[0].toUpperCase()}${items.soyad.substring(1)}",
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
           )

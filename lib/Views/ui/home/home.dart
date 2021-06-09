@@ -9,8 +9,8 @@ import 'package:fit_diyet/Views/widgets/doctor_card.dart';
 import 'package:fit_diyet/Views/widgets/drawer/drawer_header.dart';
 import 'package:fit_diyet/Views/widgets/drawer/drawer_item.dart';
 
-
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -19,9 +19,11 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   // ignore: deprecated_member_use
+
   var diyetisyenler = List<Diyetisyen>();
 
-  _getDiyetisyen() {
+  _getDiyetisyen() async {
+  
     DiyetisyenService.getDiyetisyenler().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
