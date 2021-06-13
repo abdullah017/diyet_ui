@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+
 import 'package:fit_diyet/Controllers/diyetisyen_service.dart';
 import 'package:fit_diyet/Views/ui/home/home.dart';
 import 'package:fit_diyet/Views/ui/login_screens/login_views.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,13 +13,22 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+  TextEditingController rolController = TextEditingController();
+
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   bool _isLoading = true;
+  var email;
+  var password;
+  var rePassword;
+
+  @override
+  void initState() {
+    super.initState();
+    rolController = new TextEditingController(text: '2');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,128 +69,145 @@ class _SignUpState extends State<SignUp> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            /////////////// name////////////
-
-                            // TextField(
-                            //   style: TextStyle(color: Color(0xFF000000)),
-                            //   controller: firstNameController,
-                            //   cursorColor: Color(0xFF9b9b9b),
-                            //   keyboardType: TextInputType.text,
-                            //   decoration: InputDecoration(
-                            //     prefixIcon: Icon(
-                            //       Icons.account_circle,
-                            //       color: Colors.grey,
-                            //     ),
-                            //     hintText: "Firstname",
-                            //     hintStyle: TextStyle(
-                            //         color: Color(0xFF9b9b9b),
-                            //         fontSize: 15,
-                            //         fontWeight: FontWeight.normal),
-                            //   ),
-                            // ),
-                            TextField(
-                              style: TextStyle(color: Color(0xFF000000)),
-                              controller: lastNameController,
-                              cursorColor: Color(0xFF9b9b9b),
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(
-                                  Icons.account_circle,
-                                  color: Colors.grey,
-                                ),
-                                hintText: "Lastname",
-                                hintStyle: TextStyle(
-                                    color: Color(0xFF9b9b9b),
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.normal),
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  TextFormField(
+                                    controller: mailController,
+                                    style: TextStyle(
+                                      color: Color(0xFF000000),
+                                    ),
+                                    cursorColor: Color(0xFF9b9b9b),
+                                    keyboardType: TextInputType.emailAddress,
+                                    decoration: InputDecoration(
+                                      prefixIcon: Icon(
+                                        Icons.email,
+                                        color: Colors.grey,
+                                      ),
+                                      hintText: "Email",
+                                      hintStyle: TextStyle(
+                                          color: Color(0xFF9b9b9b),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                    validator: (emailValue) {
+                                      if (emailValue.isEmpty) {
+                                        return 'Lütfen E-Postanızı girin';
+                                        // NOTE BURASI EMAİL DEĞERİ BOŞ MU ONU KONTROL EDER
+                                      }
+                                      if (!emailValue.contains("@")) {
+                                        return 'Lütfen E-Postanızı doğru biçimde giriniz';
+                                        // NOTE BURASI EMAİL DEĞERİ İÇİNDE @ İŞARETİ VARMI ONU KONTROL EDER
+                                      }
+                                      if (!emailValue.contains(RegExp(
+                                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'))) {
+                                        return 'Lütfen E-Postanızı doğru biçimde giriniz';
+                                        // NOTE BURASI EMAİL DOĞRU YAZILMIŞMI ONU KONTROL EDER
+                                      } else {
+                                        email = emailValue;
+                                        return null;
+                                      }
+                                    },
+                                  ),
+                                  TextFormField(
+                                    controller: passwordController,
+                                    style: TextStyle(color: Color(0xFF000000)),
+                                    cursorColor: Color(0xFF9b9b9b),
+                                    keyboardType: TextInputType.text,
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                      prefixIcon: Icon(
+                                        Icons.vpn_key,
+                                        color: Colors.grey,
+                                      ),
+                                      hintText: "Password",
+                                      hintStyle: TextStyle(
+                                          color: Color(0xFF9b9b9b),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                    validator: (passwordValue) {
+                                      if (passwordValue.isEmpty) {
+                                        return 'Lütfen parolanızı girin';
+                                      }
+                                      if (passwordValue.length < 6) {
+                                        return 'Lütfen 6 karakterden oluşan bir parola girin';
+                                      }
+                                      if (passwordValue.length > 20) {
+                                        return 'Lütfen en fazla 20 karakterden oluşan bir parola girin';
+                                      }
+                                      password = passwordValue;
+                                      return null;
+                                    },
+                                  ),
+                                  TextFormField(
+                                    style: TextStyle(color: Color(0xFF000000)),
+                                    cursorColor: Color(0xFF9b9b9b),
+                                    keyboardType: TextInputType.text,
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                      prefixIcon: Icon(
+                                        Icons.vpn_key,
+                                        color: Colors.grey,
+                                      ),
+                                      hintText: "Parolanızı tekrar girin",
+                                      hintStyle: TextStyle(
+                                          color: Color(0xFF9b9b9b),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                    validator: (rePasswordValue) {
+                                      if (rePasswordValue.isEmpty) {
+                                        return 'Lütfen parolanızı girin';
+                                      }
+                                      if (rePasswordValue != password) {
+                                        return 'Parolalar eşleşmiyor';
+                                      } else {
+                                        rePassword = rePasswordValue;
+                                        return null;
+                                      }
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
-
-                            /////////////// Email ////////////
-
-                            TextField(
-                              style: TextStyle(color: Color(0xFF000000)),
-                              controller: mailController,
-                              cursorColor: Color(0xFF9b9b9b),
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(
-                                  Icons.mail,
-                                  color: Colors.grey,
-                                ),
-                                hintText: "Email ",
-                                hintStyle: TextStyle(
-                                    color: Color(0xFF9b9b9b),
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ),
-
-                            /////////////// password ////////////
-
-                            TextField(
-                              style: TextStyle(color: Color(0xFF000000)),
-                              cursorColor: Color(0xFF9b9b9b),
-                              controller: passwordController,
-                              keyboardType: TextInputType.text,
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(
-                                  Icons.vpn_key,
-                                  color: Colors.grey,
-                                ),
-                                hintText: "Password",
-                                hintStyle: TextStyle(
-                                    color: Color(0xFF9b9b9b),
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ),
-                            //  TextField(
-                            //     style: TextStyle(color: Color(0xFF000000)),
-                            //     controller: phoneController,
-                            //     cursorColor: Color(0xFF9b9b9b),
-                            //     keyboardType: TextInputType.text,
-                            //     decoration: InputDecoration(
-                            //       prefixIcon: Icon(
-                            //         Icons.mobile_screen_share,
-                            //         color: Colors.grey,
-                            //       ),
-                            //       hintText: "Phone",
-                            //       hintStyle: TextStyle(
-                            //           color: Color(0xFF9b9b9b),
-                            //           fontSize: 15,
-                            //           fontWeight: FontWeight.normal),
-                            //     ),
-                            //   ),
-
                             /////////////// SignUp Button ////////////
 
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: FlatButton(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 8, bottom: 8, left: 10, right: 10),
-                                    child: Text(
-                                      _isLoading
-                                          ? 'Creating...'
-                                          : 'Create account',
-                                      textDirection: TextDirection.ltr,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15.0,
-                                        decoration: TextDecoration.none,
-                                        fontWeight: FontWeight.normal,
-                                      ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 8, bottom: 8, left: 10, right: 10),
+                                  child: Text(
+                                    _isLoading
+                                        ? 'Hesabı oluştur'
+                                        : 'Tamamlanıyor...',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15.0,
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.normal,
                                     ),
                                   ),
-                                  color: Colors.red,
-                                  disabledColor: Colors.grey,
-                                  shape: new RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(20.0)),
-                                  onPressed: _isLoading ? _register : null),
+                                ),
+                                color: Colors.red,
+                                disabledColor: Colors.grey,
+                                shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(20.0)),
+                                onPressed: () {
+                                  if (_formKey.currentState.validate()) {
+                                    _register();
+                                    print('HER ŞEY TAMAM');
+                                  } else {
+                                    print('ÜZGÜNÜM');
+                                  }
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -201,7 +225,7 @@ class _SignUpState extends State<SignUp> {
                                   builder: (context) => Login()));
                         },
                         child: Text(
-                          'Already have an Account',
+                          'Hesabınız varsa giriş yapmak için dokunun',
                           textDirection: TextDirection.ltr,
                           style: TextStyle(
                             color: Colors.white,
@@ -222,64 +246,12 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  // void _handleLogin() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-
-  //   var data = {
-  //     'rol': lastNameController.text,
-  //     'email': mailController.text,
-  //     'password': passwordController.text,
-  //   };
-
-  //   var res = await CallApi().postData(data, 'register');
-  //   var body = json.decode(res.body);
-  //   if (body['success'] == true) {
-  //     SharedPreferences localStorage = await SharedPreferences.getInstance();
-  //     localStorage.setString('token', body['token']);
-  //     localStorage.setString('kullanici', json.encode(body['kullanici']));
-
-  //     Navigator.push(
-  //         context, new MaterialPageRoute(builder: (context) => Home()));
-  //   }
-
-  //   setState(() {
-  //     _isLoading = !_isLoading;
-  //   });
-  // }
-
-  // Future<http.Response> postRequest() async {
-  //   var url = 'https://fitdiyet.online/api/register';
-
-  //   Map<dynamic, dynamic> data = {
-  //     'rol': lastNameController.text,
-  //     'email': mailController.text,
-  //     'password': passwordController.text,
-  //   };
-  //   //encode Map to JSON
-  //   var body = json.encode(data);
-
-  //   var response = await http.post(Uri.parse(url),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: body);
-  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
-  //   localStorage.setString('token',json.encode(body['token']));
-  //   localStorage.setString('kullanici', response.body);
-  //   Navigator.push(
-  //       context, new MaterialPageRoute(builder: (context) => HomeView()));
-  //   print("${response.statusCode}");
-  //   print("${response.body}");
-  //   return response;
-  // }
   void _register() async {
     setState(() {
       _isLoading = true;
     });
     var data = {
-      'rol': lastNameController.text,
+      'rol': rolController.text,
       'email': mailController.text,
       'password': passwordController.text,
     };

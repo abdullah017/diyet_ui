@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +13,13 @@ class DiyetisyenService {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var url =
         baseUrl + "diyetisyenler" + "?" + "token=" + localStorage.get("token");
-    return http.get(Uri.parse(url));
+    return http
+        .get(
+      Uri.parse(url),
+    )
+        .catchError((error, stackTrace) {
+      print("inner: $error");
+    });
   }
 
   static Future getDiyetisyen(int id) {
@@ -20,12 +27,44 @@ class DiyetisyenService {
     return http.get(Uri.parse(url));
   }
 
-  static Future postDiyetisyen(String adtxt, kaloritxt, birimtxt) async {
+  static Future postDiyetisyen(
+      String adTxt,
+      soyadTxt,
+      tcTxt,
+      telefonTxt,
+      yasTxt,
+      cinsiyetTxt,
+      boyTxt,
+      kiloTxt,
+      rahatsizlikTxt,
+      ilacTxt,
+      alkolTxt,
+      disariyemekTxt,
+      gunlukogunTxt,
+      gunluksuTxt,
+      hedefkiloTxt,
+      sevilenbesinTxt,
+      sevilmeyenbesinTxt,
+      aciklamaTxt) async {
     var url = baseUrl + "besinler";
     var map = new Map<String, dynamic>();
-    map['besin_adi'] = adtxt;
-    map['besin_kalori'] = kaloritxt;
-    map['besin_birimi'] = birimtxt;
+    map['adi'] = adTxt;
+    map['soyad'] = soyadTxt;
+    map['telefon'] = tcTxt;
+    map['yas'] = yasTxt;
+    map['danisan_boy'] = boyTxt;
+    map['danisan_kilo'] = kiloTxt;
+    map['kronik_rahatsizlik'] = rahatsizlikTxt;
+    map['ilac'] = ilacTxt;
+    map['alkol'] = alkolTxt;
+    map['disari_yemek'] = disariyemekTxt;
+    map['gunluk_ogun'] = gunlukogunTxt;
+    map['gunluk_su'] = gunluksuTxt;
+    map['hedef_kilo'] = hedefkiloTxt;
+    map['sevilen_besin'] = sevilenbesinTxt;
+    map['sevilmeyen_besin'] = sevilmeyenbesinTxt;
+    map['aciklama'] = aciklamaTxt;
+    map['cinsiyet'] = cinsiyetTxt;
 
     http.Response response = await http.post(
       Uri.parse(url),
@@ -36,14 +75,23 @@ class DiyetisyenService {
   }
 
   static authData(data, apiUrl) async {
-    var fullUrl = baseUrl + apiUrl;
-    return await http.post(Uri.parse(fullUrl),
-        body: jsonEncode(data), headers: _setHeaders());
+    try {
+      var fullUrl = baseUrl + apiUrl;
+      return await http.post(Uri.parse(fullUrl),
+          body: jsonEncode(data), headers: _setHeaders());
+    } catch (e) {
+      print(e);
+    }
   }
 
   static authDataiki(data, apiUrl) async {
-    var fullUrl = baseUrl + apiUrl;
-    return await http.get(Uri.parse(fullUrl), headers: _setHeaders());
+    try {
+      var fullUrl = baseUrl + apiUrl;
+      return await http.get(Uri.parse(fullUrl), headers: _setHeaders());
+    } catch (e) {
+      print(e);
+      HttpException(e);
+    }
   }
 
   static getData(apiUrl) async {

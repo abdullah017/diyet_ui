@@ -5,6 +5,7 @@ import 'package:fit_diyet/Controllers/diyetisyen_service.dart';
 import 'package:fit_diyet/Views/ui/categories/categories.dart';
 import 'package:fit_diyet/Views/ui/doctor/doctor_detail.dart';
 import 'package:fit_diyet/Views/ui/drawers/profil_page.dart';
+import 'package:fit_diyet/Views/ui/login_screens/login_views.dart';
 import 'package:fit_diyet/Views/widgets/doctor_card.dart';
 import 'package:fit_diyet/Views/widgets/drawer/drawer_header.dart';
 import 'package:fit_diyet/Views/widgets/drawer/drawer_item.dart';
@@ -19,19 +20,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   // ignore: deprecated_member_use
-
   var diyetisyenler = List<Diyetisyen>();
-
-  _getDiyetisyen() async {
-  
-    DiyetisyenService.getDiyetisyenler().then((response) {
-      setState(() {
-        Iterable list = json.decode(response.body);
-        diyetisyenler =
-            list.map((model) => Diyetisyen.fromJson(model)).toList();
-      });
-    });
-  }
 
   initState() {
     super.initState();
@@ -125,7 +114,8 @@ class _HomeViewState extends State<HomeView> {
               createDrawerItem(icon: Icons.straighten, text: 'Ölçümlerim'),
               createDrawerItem(icon: Icons.event, text: 'Randevularım'),
               createDrawerItem(icon: Icons.message, text: 'Mesajlarım'),
-              createDrawerItem(icon: Icons.settings, text: 'Ayarlar'),
+              createDrawerItem(
+                  icon: Icons.exit_to_app, text: 'Çıkış', onTap: logout),
               Divider(),
               createDrawerItem(icon: Icons.bug_report, text: 'Hata bildirin'),
               ListTile(
@@ -269,5 +259,46 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
     );
+  }
+
+  _getDiyetisyen() async {
+    DiyetisyenService.getDiyetisyenler().then(
+      (response) {
+        if (response.statusCode == 200) {
+          setState(
+            () {
+              Iterable list = json.decode(response.body);
+              diyetisyenler =
+                  list.map((model) => Diyetisyen.fromJson(model)).toList();
+            },
+          );
+        } else {
+          Navigator.push(
+            context,
+            new MaterialPageRoute(builder: (context) => Login()),
+          );
+        }
+      },
+    ).catchError(
+      (error, stackTrace) {
+        print("AHA BİR HATA YAKALADIM: $error");
+        if (error != null) {
+          Navigator.push(
+            context,
+            new MaterialPageRoute(builder: (context) => Login()),
+          );
+        }
+      },
+    );
+  }
+
+  void logout() async {
+    //var res = await DiyetisyenService.getData('/logout');
+    //var body = json.decode(res.body);
+    // if(body['success']){
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    localStorage.remove('user');
+    localStorage.remove('token');
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
   }
 }

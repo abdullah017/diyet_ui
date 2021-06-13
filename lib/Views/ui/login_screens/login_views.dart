@@ -16,6 +16,8 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   var email;
   var password;
+  TextEditingController mailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   _showMsg(msg) {
     final snackBar = SnackBar(
@@ -59,9 +61,12 @@ class _LoginState extends State<Login> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               TextFormField(
-                                style: TextStyle(color: Color(0xFF000000)),
+                                controller: mailController,
+                                style: TextStyle(
+                                  color: Color(0xFF000000),
+                                ),
                                 cursorColor: Color(0xFF9b9b9b),
-                                keyboardType: TextInputType.text,
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.email,
@@ -75,13 +80,25 @@ class _LoginState extends State<Login> {
                                 ),
                                 validator: (emailValue) {
                                   if (emailValue.isEmpty) {
-                                    return 'Please enter email';
+                                    return 'Lütfen E-Postanızı girin';
+                                    // NOTE BURASI EMAİL DEĞERİ BOŞ MU ONU KONTROL EDER
                                   }
-                                  email = emailValue;
-                                  return null;
+                                  if (!emailValue.contains("@")) {
+                                    return 'Lütfen E-Postanızı doğru biçimde giriniz';
+                                    // NOTE BURASI EMAİL DEĞERİ İÇİNDE @ İŞARETİ VARMI ONU KONTROL EDER
+                                  }
+                                  if (!emailValue.contains(RegExp(
+                                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'))) {
+                                    return 'Lütfen E-Postanızı doğru biçimde giriniz';
+                                    // NOTE BURASI EMAİL DOĞRU YAZILMIŞMI ONU KONTROL EDER
+                                  } else {
+                                    email = emailValue;
+                                    return null;
+                                  }
                                 },
                               ),
                               TextFormField(
+                                controller: passwordController,
                                 style: TextStyle(color: Color(0xFF000000)),
                                 cursorColor: Color(0xFF9b9b9b),
                                 keyboardType: TextInputType.text,
@@ -99,7 +116,13 @@ class _LoginState extends State<Login> {
                                 ),
                                 validator: (passwordValue) {
                                   if (passwordValue.isEmpty) {
-                                    return 'Please enter some text';
+                                    return 'Lütfen parolanızı girin';
+                                  }
+                                  if (passwordValue.length < 6) {
+                                    return 'Parolanızı lütfen doğru giriniz';
+                                  }
+                                  if (passwordValue.length > 20) {
+                                    return 'Parolanızı lütfen doğru giriniz';
                                   }
                                   password = passwordValue;
                                   return null;
@@ -179,12 +202,22 @@ class _LoginState extends State<Login> {
         data, 'giris?email=$email&password=$password');
     var body = json.decode(res.body);
     // if (body['success']) {
+
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    print(body);
+
     //print(body[0]["token"]);
     print(body['token']);
+    print(body);
+    print(body['token']);
     localStorage.setString('token', body['token'].toString());
+    print(body);
     //localStorage.setString('user', json.encode(body['user']));
+    // if (body["giriş başarısız"]) {
+    //   Navigator.push(
+    //     context,
+    //     new MaterialPageRoute(builder: (context) => Login()),
+    //   );
+    // }
     Navigator.push(
       context,
       new MaterialPageRoute(builder: (context) => HomeView()),

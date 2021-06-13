@@ -1,4 +1,4 @@
-#Thu Jun 10 00:49:13 TRT 2021
+#Sun Jun 13 13:38:21 TRT 2021
 base.0=/home/abdullah/Belgeler/AndroiProject/diyet_ui/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

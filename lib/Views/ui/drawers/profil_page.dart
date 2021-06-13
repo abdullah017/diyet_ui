@@ -14,12 +14,45 @@ class _ProfilPageState extends State<ProfilPage> {
   final kaloriController = TextEditingController();
   final birimController = TextEditingController();
 
-  String adtxt;
-  String kaloritxt;
-  String birimtxt;
-  String kategoritxt;
+  String adTxt;
+  String soyadTxt;
+  String tcTxt;
+  String telefonTxt;
+  String yasTxt;
+  String boyTxt;
+  String kiloTxt;
+  String rahatsizlikTxt;
+  String ilacTxt;
+  String alkolTxt;
+  String disariyemekTxt;
+  String gunlukogunTxt;
+  String gunluksuTxt;
+  String hedefkiloTxt;
+  String sevilenbesinTxt;
+  String sevilmeyenbesinTxt;
+  String aciklamaTxt;
+  String cinsiyetTxt;
+
   _postDiyetisyen() {
-    DiyetisyenService.postDiyetisyen(adtxt, kaloritxt, birimtxt);
+    DiyetisyenService.postDiyetisyen(
+        adTxt,
+        soyadTxt,
+        tcTxt,
+        telefonTxt,
+        yasTxt,
+        boyTxt,
+        kiloTxt,
+        rahatsizlikTxt,
+        ilacTxt,
+        alkolTxt,
+        disariyemekTxt,
+        gunlukogunTxt,
+        gunluksuTxt,
+        hedefkiloTxt,
+        sevilenbesinTxt,
+        sevilmeyenbesinTxt,
+        aciklamaTxt,
+        cinsiyetTxt);
   }
 
   int _radioValue = 0;
@@ -58,7 +91,7 @@ class _ProfilPageState extends State<ProfilPage> {
                     lblText: "Ad",
                     txtController: adController,
                     onchanged: (String adi) {
-                      adtxt = adi;
+                      adTxt = adi;
                     },
                   ),
 
@@ -66,20 +99,130 @@ class _ProfilPageState extends State<ProfilPage> {
                     height: 10,
                   ),
                   ProfileFormTextField(
-                    lblText: "Kalori",
+                    lblText: "Soyad",
                     txtController: kaloriController,
-                    onchanged: (String kalori) {
-                      kaloritxt = kalori;
+                    onchanged: (String soyad) {
+                      soyadTxt = soyad;
                     },
                   ),
                   ProfileFormTextField(
                     txtController: birimController,
-                    lblText: "Birim",
-                    onchanged: (String birim) {
-                      birimtxt = birim;
+                    lblText: "T.C",
+                    onchanged: (String tc) {
+                      tcTxt = tc;
+                    },
+                  ),
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Yaş",
+                    onchanged: (String yas) {
+                      yasTxt = yas;
+                    },
+                  ),
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Boy",
+                    onchanged: (String boy) {
+                      boyTxt = boy;
                     },
                   ),
 
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Kilo",
+                    onchanged: (String kilo) {
+                      kiloTxt = kilo;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Yaş",
+                    onchanged: (String rahatsizlik) {
+                      rahatsizlikTxt = rahatsizlik;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "İlaç",
+                    onchanged: (String ilac) {
+                      ilacTxt = ilac;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Alkol",
+                    onchanged: (String alkol) {
+                      alkolTxt = alkol;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Dışarıda Yenilen Yemek",
+                    onchanged: (String disariyemek) {
+                      disariyemekTxt = disariyemek;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Günlük Tüketilen Öğün",
+                    onchanged: (String gunlukogun) {
+                      gunlukogunTxt = gunlukogun;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Günlük Tüketilen Su",
+                    onchanged: (String gunluksu) {
+                      gunluksuTxt = gunluksu;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Hedef Kilo",
+                    onchanged: (String hedefkilo) {
+                      hedefkiloTxt = hedefkilo;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Sevilen Besinler",
+                    onchanged: (String sevilenbesin) {
+                      sevilenbesinTxt = sevilenbesin;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Sevilmeyen Besinler",
+                    onchanged: (String sevilmeyenbesin) {
+                      sevilmeyenbesinTxt = sevilmeyenbesin;
+                    },
+                  ),
+
+                  ProfileFormTextField(
+                    txtController: birimController,
+                    lblText: "Diğer Belirtmek İstedikleriniz",
+                    onchanged: (String aciklama) {
+                      aciklamaTxt = aciklama;
+                    },
+                  ),
+
+                  // ProfileFormTextField(
+                  //                   txtController: birimController,
+                  //                   lblText: "Dışarıda Yenilen Yemek",
+                  //                   onchanged: (String disariyemek) {
+                  //                     disariyemekTxt = disariyemek;
+                  //                   },
+                  //                 ),
+
                   SizedBox(
                     height: 10,
                   ),
@@ -87,32 +230,32 @@ class _ProfilPageState extends State<ProfilPage> {
                   SizedBox(
                     height: 10,
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     Text("CİNSİYET:"),
-                  //     new Radio(
-                  //       value: 0,
-                  //       groupValue: _radioValue,
-                  //       onChanged: _handleRadioValueChange,
-                  //     ),
-                  //     new Text(
-                  //       'ERKEK',
-                  //       style: new TextStyle(fontSize: 16.0),
-                  //     ),
-                  //     new Radio(
-                  //       value: 1,
-                  //       groupValue: _radioValue,
-                  //       onChanged: _handleRadioValueChange,
-                  //     ),
-                  //     new Text(
-                  //       'KADIN',
-                  //       style: new TextStyle(
-                  //         fontSize: 16.0,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("CİNSİYET:"),
+                      new Radio(
+                        value: 0,
+                        groupValue: _radioValue,
+                        onChanged: _handleRadioValueChange,
+                      ),
+                      new Text(
+                        'ERKEK',
+                        style: new TextStyle(fontSize: 16.0),
+                      ),
+                      new Radio(
+                        value: 1,
+                        groupValue: _radioValue,
+                        onChanged: _handleRadioValueChange,
+                      ),
+                      new Text(
+                        'KADIN',
+                        style: new TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
+                  ),
                   Row(
                     children: <Widget>[
                       Expanded(
@@ -124,7 +267,7 @@ class _ProfilPageState extends State<ProfilPage> {
                           ),
                           onPressed: () {
                             //_postDiyetisyen();
-                           // _formKey.currentState.save();
+                            // _formKey.currentState.save();
                             if (_formKey.currentState.validate()) {
                               _postDiyetisyen();
                             } else {
