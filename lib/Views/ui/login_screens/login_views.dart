@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:fit_diyet/Controllers/diyetisyen_service.dart';
+import 'package:fit_diyet/Controllers/authantication_service.dart';
+
 import 'package:fit_diyet/Views/ui/home/home.dart';
 import 'package:fit_diyet/Views/ui/register/register.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +83,10 @@ class _LoginState extends State<Login> {
                                             fontSize: 15,
                                             fontWeight: FontWeight.normal),
                                       ),
+                                      onChanged: (value) {
+                                        email = value.trim();
+                                        print(email);
+                                      },
                                       validator: (emailValue) {
                                         if (emailValue.isEmpty) {
                                           return 'Lütfen E-Postanızı girin';
@@ -127,6 +132,10 @@ class _LoginState extends State<Login> {
                                             fontSize: 15,
                                             fontWeight: FontWeight.normal),
                                       ),
+                                      onChanged: (value) {
+                                        password = value.trim();
+                                        print(password);
+                                      },
                                       validator: (passwordValue) {
                                         if (passwordValue.isEmpty) {
                                           return 'Lütfen parolanızı girin';
@@ -227,7 +236,7 @@ class _LoginState extends State<Login> {
     });
     var data = {'email': email, 'password': password};
 
-    var res = await DiyetisyenService.authDataiki(
+    var res = await AuthService.authData(
         data, 'giris?email=$email&password=$password');
     var body = json.decode(res.body);
     // if (body['success']) {
@@ -239,6 +248,7 @@ class _LoginState extends State<Login> {
     print(body);
     print(body['token']);
     localStorage.setString('token', body['token'].toString());
+    localStorage.setString('id', body['id'].toString());
     print(body);
     //localStorage.setString('user', json.encode(body['user']));
     // if (body["giriş başarısız"]) {

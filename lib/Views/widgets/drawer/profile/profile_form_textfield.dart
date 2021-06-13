@@ -5,21 +5,25 @@ class ProfileFormTextField extends StatelessWidget {
   final TextEditingController txtController;
   final Function onchanged;
   final String lblText;
+  final TextInputType klavyeTipi;
 
   const ProfileFormTextField(
-      {Key key, this.txtController, this.onchanged, this.lblText})
+      {Key key,
+      this.txtController,
+      this.onchanged,
+      this.lblText,
+      this.klavyeTipi})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      keyboardType: klavyeTipi,
       decoration: InputDecoration(labelText: lblText),
       onChanged: onchanged,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter some text';
+          return 'Lütfen tüm alanları doldurunuz';
         }
         return null;
       },

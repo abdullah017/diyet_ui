@@ -32,8 +32,8 @@ class DiyetisyenService {
       soyadTxt,
       tcTxt,
       telefonTxt,
-      yasTxt,
       cinsiyetTxt,
+      yasTxt,
       boyTxt,
       kiloTxt,
       rahatsizlikTxt,
@@ -46,11 +46,14 @@ class DiyetisyenService {
       sevilenbesinTxt,
       sevilmeyenbesinTxt,
       aciklamaTxt) async {
-    var url = baseUrl + "besinler";
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var url = baseUrl + "danisanlar/update?token=" + localStorage.get("token");
     var map = new Map<String, dynamic>();
     map['adi'] = adTxt;
     map['soyad'] = soyadTxt;
-    map['telefon'] = tcTxt;
+    map['tc'] = tcTxt;
+    map['telefon'] = telefonTxt;
+    map['cinsiyet'] = cinsiyetTxt;
     map['yas'] = yasTxt;
     map['danisan_boy'] = boyTxt;
     map['danisan_kilo'] = kiloTxt;
@@ -64,7 +67,6 @@ class DiyetisyenService {
     map['sevilen_besin'] = sevilenbesinTxt;
     map['sevilmeyen_besin'] = sevilmeyenbesinTxt;
     map['aciklama'] = aciklamaTxt;
-    map['cinsiyet'] = cinsiyetTxt;
 
     http.Response response = await http.post(
       Uri.parse(url),

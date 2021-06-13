@@ -5,7 +5,7 @@ import 'package:fit_diyet/Models/diyetisyen_model.dart';
 import 'package:fit_diyet/Views/ui/doctor/doctor_detail.dart';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class CategoriesView extends StatefulWidget {
   final Diyetisyen diyetisyenModel;

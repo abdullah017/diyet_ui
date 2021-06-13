@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:fit_diyet/Controllers/diyetisyen_service.dart';
+import 'package:fit_diyet/Controllers/authantication_service.dart';
+
 import 'package:fit_diyet/Views/ui/home/home.dart';
 import 'package:fit_diyet/Views/ui/login_screens/login_views.dart';
 
@@ -269,7 +270,7 @@ class _SignUpState extends State<SignUp> {
       'password': passwordController.text,
     };
 
-    var res = await DiyetisyenService.authData(data, 'register');
+    var res = await AuthService.authData(data, 'register');
     var body = json.decode(res.body);
     // if (body['success']) {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -277,6 +278,7 @@ class _SignUpState extends State<SignUp> {
     //print(body[0]["token"]);
 
     localStorage.setString('token', body[0]['token'].toString());
+    localStorage.setString('id', body[0]['id'].toString());
     //localStorage.setString('user', json.encode(body['user']));
     Navigator.push(
       context,
