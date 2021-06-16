@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:fit_diyet/Controllers/authantication_service.dart';
 import 'package:fit_diyet/Views/helpers/size_settings.dart';
 import 'package:fit_diyet/Models/diyetisyen_model.dart';
 import 'package:fit_diyet/Controllers/diyetisyen_service.dart';
@@ -264,32 +265,26 @@ class _HomeViewState extends State<HomeView> {
   _getDiyetisyen() async {
     DiyetisyenService.getDiyetisyenler().then(
       (response) {
-        if (response.statusCode == 200) {
-          setState(
-            () {
-              Iterable list = json.decode(response.body);
-              diyetisyenler =
-                  list.map((model) => Diyetisyen.fromJson(model)).toList();
-            },
-          );
-        } else {
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => Login()),
-          );
-        }
-      },
-    ).catchError(
-      (error, stackTrace) {
-        print("AHA BİR HATA YAKALADIM: $error");
-        if (error != null) {
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => Login()),
-          );
-        }
+        setState(
+          () {
+            Iterable list = json.decode(response.body);
+            diyetisyenler =
+                list.map((model) => Diyetisyen.fromJson(model)).toList();
+          },
+        );
       },
     );
+    // ).catchError(
+    //   (error, stackTrace) {
+    //     print("AHA BİR HATA YAKALADIM: $error");
+    //     if (error != null) {
+    //       Navigator.push(
+    //         context,
+    //         new MaterialPageRoute(builder: (context) => Login()),
+    //       );
+    //     }
+    //   },
+    // );
   }
 
   void logout() async {

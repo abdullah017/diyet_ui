@@ -18,22 +18,10 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   var email;
   var password;
+
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  // _showMsg(msg) {
-  //   final snackBar = SnackBar(
-  //     content: Text(msg),
-  //     action: SnackBarAction(
-  //       label: 'Close',
-  //       onPressed: () {
-  //         // Some code to undo the change!
-  //       },
-  //     ),
-  //   );
-  //   _scaffoldKey.currentState.showSnackBar(snackBar);
-  // }
-
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -160,9 +148,7 @@ class _LoginState extends State<Login> {
                                               left: 10,
                                               right: 10),
                                           child: Text(
-                                            _isLoading
-                                                ? 'Giriş yapılıyor...'
-                                                : 'Giriş',
+                                            _isLoading ? 'Giriş' : 'Giriş',
                                             textDirection: TextDirection.ltr,
                                             style: TextStyle(
                                               color: Colors.white,
@@ -236,32 +222,39 @@ class _LoginState extends State<Login> {
     });
     var data = {'email': email, 'password': password};
 
-    var res = await AuthService.authData(
+    var res = await AuthService.loginData(
         data, 'giris?email=$email&password=$password');
     var body = json.decode(res.body);
-    // if (body['success']) {
+    if (body["giris"] == 0) {
+      return showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("Giriş Hatası"),
+          content: Text(
+              "Giriş yaptığınız hesabın sisteme kayıtlı ve doğru olduğundan emin olun.\nVe tekrar giriş yapmayı deneyin"),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: Text("okay"),
+            ),
+          ],
+        ),
+      );
+    } else {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
 
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-
-    //print(body[0]["token"]);
-    print(body['token']);
-    print(body);
-    print(body['token']);
-    localStorage.setString('token', body['token'].toString());
-    localStorage.setString('id', body['id'].toString());
-    print(body);
-    //localStorage.setString('user', json.encode(body['user']));
-    // if (body["giriş başarısız"]) {
-    //   Navigator.push(
-    //     context,
-    //     new MaterialPageRoute(builder: (context) => Login()),
-    //   );
-    // }
-    Navigator.push(
-      context,
-      new MaterialPageRoute(builder: (context) => HomeView()),
-    );
-    //}
+      localStorage.setString('token', body['token'].toString());
+      localStorage.setString('rol', body['rol'].toString());
+      print(token);
+      print(rol);
+      print(body);
+      Navigator.push(
+        context,
+        new MaterialPageRoute(builder: (context) => HomeView()),
+      );
+    }
 
     setState(() {
       _isLoading = false;

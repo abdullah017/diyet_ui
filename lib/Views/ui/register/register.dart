@@ -270,24 +270,33 @@ class _SignUpState extends State<SignUp> {
       'password': passwordController.text,
     };
 
-    var res = await AuthService.authData(data, 'register');
+    var res = await AuthService.registerData(data, 'register');
     var body = json.decode(res.body);
-    // if (body['success']) {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    print(body);
-    //print(body[0]["token"]);
+    if (body = !null) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      print(body);
+      localStorage.setString('token', body[0]['token'].toString());
 
-    localStorage.setString('token', body[0]['token'].toString());
-    localStorage.setString('id', body[0]['id'].toString());
-    //localStorage.setString('user', json.encode(body['user']));
-    Navigator.push(
-      context,
-      new MaterialPageRoute(builder: (context) => HomeView()),
-    );
-    //}
+      localStorage.setString('rol', body[0]['rol'].toString());
+      print("${localStorage.get(rol)}");
+      print("${localStorage.get(token)}");
 
-    setState(() {
-      _isLoading = false;
-    });
+      //localStorage.setString('rol', body[0]['rol'].toString());
+      Navigator.push(
+        context,
+        new MaterialPageRoute(builder: (context) => HomeView()),
+      );
+    } else {
+      AlertDialog(
+        title: Text("My title"),
+        content: Text("This is my message."),
+        actions: [
+          Text("hata"),
+        ],
+      );
+      // show the dialog
+
+    }
   }
 }
+//}
