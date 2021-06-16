@@ -56,4 +56,21 @@ class DanisanService {
 
     print(response.body);
   }
+
+  static Future getProfile() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var url = baseUrl +
+        "danisanlar/" +
+        localStorage.get("id") +
+        "?" +
+        "token=" +
+        localStorage.get("token");
+    return http
+        .get(
+      Uri.parse(url),
+    )
+        .catchError((error, stackTrace) {
+      print("inner: $error");
+    });
+  }
 }

@@ -20,8 +20,6 @@ class AuthService {
   }
 
   static loginData(data, apiUrl) async {
-
-
     try {
       var fullUrl = baseUrl + apiUrl;
       return await http.get(Uri.parse(fullUrl));
@@ -47,10 +45,10 @@ class AuthService {
         'Authorization': 'Bearer $token'
       };
 
-  static _getToken() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    token = (localStorage.get("token"));
-  }
+  // static _getToken() async {
+  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //   token = (localStorage.get("token"));
+  // }
 
   static getRol() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();

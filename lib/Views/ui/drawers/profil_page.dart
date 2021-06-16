@@ -1,8 +1,10 @@
+
 import 'package:fit_diyet/Controllers/danisan_service.dart';
+
 import 'package:fit_diyet/Views/widgets/appbar/arrow_back_appbar.dart';
 import 'package:fit_diyet/Views/widgets/drawer/profile/profile_form_textfield.dart';
-
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilPage extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
+  SharedPreferences _prefs;
   final adController = TextEditingController();
   final soyadController = TextEditingController();
   final tcController = TextEditingController();
@@ -139,6 +142,8 @@ class _ProfilPageState extends State<ProfilPage> {
   }
 
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  String userName;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -157,6 +162,7 @@ class _ProfilPageState extends State<ProfilPage> {
                       children: <Widget>[
                         ProfileFormTextField(
                           lblText: "Ad",
+                          hntText: userName,
                           klavyeTipi: TextInputType.name,
                           txtController: adController,
                           onchanged: (String adi) {
@@ -656,10 +662,18 @@ class _ProfilPageState extends State<ProfilPage> {
                                   "GÜNCELLE",
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
                                   if (_formKey.currentState.validate()) {
-                                    _postProfile();
                                     _formKey.currentState.save();
+                                    _postProfile();
+                                    _prefs =
+                                        await SharedPreferences.getInstance();
+                                    _prefs.setString('adi', adTxt);
+                                    userName = _prefs.getString("adi");
+                                    print(userName);
+                                    _prefs.setString('soyad', soyadTxt);
+                                    //localStorage.setString('id', body['id'].toString());
+
                                   } else {
                                     print("validation failed");
                                   }
@@ -667,21 +681,6 @@ class _ProfilPageState extends State<ProfilPage> {
                               ),
                             ),
                             SizedBox(width: 20),
-                            // Expanded(
-                            //   child: MaterialButton(
-                            //     color: Theme.of(context).accentColor,
-                            //     child: Text(
-                            //       "Temizle",
-                            //       style: TextStyle(color: Colors.white),
-                            //     ),
-                            //     onPressed: () {
-                            //       _formKey.currentState.reset();
-                            //       // adController.clear();
-                            //       // kaloriController.clear();
-                            //       // birimController.clear();
-                            //     },
-                            //   ),
-                            // ),
                           ],
                         )
                       ],

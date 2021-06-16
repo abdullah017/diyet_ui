@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:fit_diyet/Controllers/authantication_service.dart';
 import 'package:fit_diyet/Views/helpers/size_settings.dart';
 import 'package:fit_diyet/Models/diyetisyen_model.dart';
 import 'package:fit_diyet/Controllers/diyetisyen_service.dart';

@@ -231,22 +231,22 @@ class _LoginState extends State<Login> {
         builder: (ctx) => AlertDialog(
           title: Text("Giriş Hatası"),
           content: Text(
-              "Giriş yaptığınız hesabın sisteme kayıtlı ve doğru olduğundan emin olun.\nVe tekrar giriş yapmayı deneyin"),
+              "Giriş yapmaya çalıştığınız hesabın e-posta ve şifresini doğru girdiğinizden emin olun\nVe tekrar giriş yapmayı deneyin"),
           actions: <Widget>[
             FlatButton(
               onPressed: () {
                 Navigator.of(ctx).pop();
               },
-              child: Text("okay"),
+              child: Text("Tamam"),
             ),
           ],
         ),
       );
     } else {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
-
       localStorage.setString('token', body['token'].toString());
       localStorage.setString('rol', body['rol'].toString());
+      localStorage.setString('id', body['id'].toString());
       print(token);
       print(rol);
       print(body);

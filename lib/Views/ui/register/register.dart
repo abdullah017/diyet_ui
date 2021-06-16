@@ -272,31 +272,38 @@ class _SignUpState extends State<SignUp> {
 
     var res = await AuthService.registerData(data, 'register');
     var body = json.decode(res.body);
-    if (body = !null) {
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      print(body);
-      localStorage.setString('token', body[0]['token'].toString());
 
-      localStorage.setString('rol', body[0]['rol'].toString());
-      print("${localStorage.get(rol)}");
-      print("${localStorage.get(token)}");
-
-      //localStorage.setString('rol', body[0]['rol'].toString());
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    print(body);
+    localStorage.setString('token', body['token'].toString());
+    localStorage.setString('rol', body['rol'].toString());
+    localStorage.setString('id', body['id'].toString());
+    //localStorage.setString('rol', body[0]['rol'].toString());
+    //localStorage.setString('id', body[0]['id'].toString());
+    print("${localStorage.get(rol)}");
+    print("${localStorage.get(token)}");
+    if (body["kayit"] == 1) {
       Navigator.push(
         context,
         new MaterialPageRoute(builder: (context) => HomeView()),
       );
-    } else {
-      AlertDialog(
-        title: Text("My title"),
-        content: Text("This is my message."),
-        actions: [
-          Text("hata"),
-        ],
+    } else if (body["kayit"] == 0) {
+      return showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("Kayıt Hatası"),
+          content: Text(
+              "Kayıt yaptığınız hesap zaten sisteme kayıtlı.\nLütfen farklı bir e-posta ile kayıt olmayı deneyin!"),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: Text("Tamam"),
+            ),
+          ],
+        ),
       );
-      // show the dialog
-
     }
   }
 }
-//}
