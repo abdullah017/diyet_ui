@@ -57,6 +57,25 @@ class DanisanService {
     print(response.body);
   }
 
+  static Future postRandevuAyar(String saat, tarih,int id) async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var url = baseUrl + "saat/insert?token=" + localStorage.get("token");
+    var map = new Map<String, dynamic>();
+    map['saat'] = saat;
+    map['tarih'] = tarih;
+
+
+    http.Response response = await http
+        .post(
+      Uri.parse(url),
+      body: map,
+    )
+        .catchError((e) {
+      print(e);
+    });
+    print(response.body);
+  }
+
   static Future getProfile() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var url = baseUrl +

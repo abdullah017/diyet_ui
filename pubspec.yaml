@@ -34,6 +34,7 @@ dependencies:
   flutter_form_builder: ^6.0.1
   flutter_bloc: ^7.0.1
   shared_preferences:
+  flutter_datetime_picker: 
 
 dev_dependencies:
   flutter_test:

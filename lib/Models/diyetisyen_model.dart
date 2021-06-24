@@ -15,65 +15,61 @@ class Diyetisyen {
     this.id,
     this.adi,
     this.soyad,
-    this.mail,
-    this.parola,
     this.tc,
     this.telefon,
     this.cinsiyet,
     this.yas,
-    this.profilFotografi,
     this.hakkimda,
     this.kategori,
     this.puan,
+    this.image,
     this.kullaniciId,
+    this.rolId,
   });
 
   int id;
   String adi;
   String soyad;
-  String mail;
-  String parola;
   String tc;
   String telefon;
   String cinsiyet;
   String yas;
-  String profilFotografi;
   String hakkimda;
   String kategori;
-  String puan;
+  dynamic puan;
+  String image;
   String kullaniciId;
+  dynamic rolId;
 
   factory Diyetisyen.fromJson(Map<String, dynamic> json) => Diyetisyen(
         id: json["id"],
-        adi: json["adi"],
-        soyad: json["soyad"],
-        mail: json["mail"],
-        parola: json["parola"],
-        tc: json["tc"],
-        telefon: json["telefon"],
-        cinsiyet: json["cinsiyet"],
-        yas: json["yas"],
-        profilFotografi: json["profil_fotografi"],
-        hakkimda: json["hakkimda"],
-        kategori: json["kategori"],
+        adi: json["adi"] == null ? null : json["adi"],
+        soyad: json["soyad"] == null ? null : json["soyad"],
+        tc: json["tc"] == null ? null : json["tc"],
+        telefon: json["telefon"] == null ? null : json["telefon"],
+        cinsiyet: json["cinsiyet"] == null ? null : json["cinsiyet"],
+        yas: json["yas"] == null ? null : json["yas"],
+        hakkimda: json["hakkimda"] == null ? null : json["hakkimda"],
+        kategori: json["kategori"] == null ? null : json["kategori"],
         puan: json["puan"],
+        image: json["image"] == null ? null : json["image"],
         kullaniciId: json["kullanici_id"],
+        rolId: json["rol_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "adi": adi,
-        "soyad": soyad,
-        "mail": mail,
-        "parola": parola,
-        "tc": tc,
-        "telefon": telefon,
-        "cinsiyet": cinsiyet,
-        "yas": yas,
-        "profil_fotografi": profilFotografi,
-        "hakkimda": hakkimda,
-        "kategori": kategori,
+        "adi": adi == null ? null : adi,
+        "soyad": soyad == null ? null : soyad,
+        "tc": tc == null ? null : tc,
+        "telefon": telefon == null ? null : telefon,
+        "cinsiyet": cinsiyet == null ? null : cinsiyet,
+        "yas": yas == null ? null : yas,
+        "hakkimda": hakkimda == null ? null : hakkimda,
+        "kategori": kategori == null ? null : kategori,
         "puan": puan,
+        "image": image == null ? null : image,
         "kullanici_id": kullaniciId,
+        "rol_id": rolId,
       };
 }

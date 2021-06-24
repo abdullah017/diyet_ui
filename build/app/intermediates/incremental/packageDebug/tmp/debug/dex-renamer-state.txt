@@ -1,4 +1,4 @@
-#Wed Jun 16 21:40:47 TRT 2021
-base.0=/home/abdullah/Belgeler/AndroiProject/diyet_ui/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Wed Jun 23 23:12:53 TRT 2021
+base.0=/home/abdullah/Belgeler/GitHub/diyet_ui/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

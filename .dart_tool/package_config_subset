@@ -50,6 +50,10 @@ flutter_bloc
 2.12
 file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/flutter_bloc-7.0.1/
 file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/flutter_bloc-7.0.1/lib/
+flutter_datetime_picker
+2.12
+file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/flutter_datetime_picker-1.5.1/
+file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/flutter_datetime_picker-1.5.1/lib/
 flutter_form_builder
 2.12
 file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/flutter_form_builder-6.0.1/
@@ -208,8 +212,8 @@ file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0/
 file:///home/abdullah/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0/lib/
 fit_diyet
 2.7
-file:///home/abdullah/Belgeler/AndroiProject/diyet_ui/
-file:///home/abdullah/Belgeler/AndroiProject/diyet_ui/lib/
+file:///home/abdullah/Belgeler/GitHub/diyet_ui/
+file:///home/abdullah/Belgeler/GitHub/diyet_ui/lib/
 sky_engine
 2.12
 file:///opt/flutter/bin/cache/pkg/sky_engine/

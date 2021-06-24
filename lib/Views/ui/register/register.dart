@@ -185,6 +185,7 @@ class _SignUpState extends State<SignUp> {
 
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
+                                    // ignore: deprecated_member_use
                                     child: FlatButton(
                                       child: Padding(
                                         padding: EdgeInsets.only(
@@ -295,6 +296,7 @@ class _SignUpState extends State<SignUp> {
           content: Text(
               "Kayıt yaptığınız hesap zaten sisteme kayıtlı.\nLütfen farklı bir e-posta ile kayıt olmayı deneyin!"),
           actions: <Widget>[
+            // ignore: deprecated_member_use
             FlatButton(
               onPressed: () {
                 Navigator.of(ctx).pop();

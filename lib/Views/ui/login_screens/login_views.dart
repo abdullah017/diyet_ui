@@ -140,6 +140,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(10.0),
+                                      // ignore: deprecated_member_use
                                       child: FlatButton(
                                         child: Padding(
                                           padding: EdgeInsets.only(
@@ -233,6 +234,7 @@ class _LoginState extends State<Login> {
           content: Text(
               "Giriş yapmaya çalıştığınız hesabın e-posta ve şifresini doğru girdiğinizden emin olun\nVe tekrar giriş yapmayı deneyin"),
           actions: <Widget>[
+            // ignore: deprecated_member_use
             FlatButton(
               onPressed: () {
                 Navigator.of(ctx).pop();

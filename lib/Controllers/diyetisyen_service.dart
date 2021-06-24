@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,23 +10,19 @@ const baseUrl = "https://www.fitdiyet.online/api/";
 var token;
 
 class DiyetisyenService {
-  static Future getDiyetisyenler() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var url =
-        baseUrl + "diyetisyenler" + "?" + "token=" + localStorage.get("token");
-    return http
-        .get(
-      Uri.parse(url),
-    )
-        .catchError((error, stackTrace) {
-      print("inner: $error");
-    });
-  }
-
-  static Future getDiyetisyen(int id) {
-    var url = baseUrl + "diyetisyen/$id";
-    return http.get(Uri.parse(url));
-  }
+    static getRandevu() async {
+     SharedPreferences localStorage = await SharedPreferences.getInstance();
+      var url = baseUrl +
+          "danisan/randevularim" +
+          "?" +
+          "token=" +
+          localStorage.getString("token");
+       await http.get(
+          Uri.parse(
+              url),
+        );
+    
+   }
 
   static Future postDiyetisyen(
       String adTxt,

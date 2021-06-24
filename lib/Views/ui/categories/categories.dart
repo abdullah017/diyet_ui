@@ -1,15 +1,13 @@
 import 'dart:convert';
-
 import 'package:fit_diyet/Controllers/diyetisyen_service.dart';
 import 'package:fit_diyet/Models/diyetisyen_model.dart';
 import 'package:fit_diyet/Views/ui/doctor/doctor_detail.dart';
-
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class CategoriesView extends StatefulWidget {
   final Diyetisyen diyetisyenModel;
-
   const CategoriesView({Key key, this.diyetisyenModel}) : super(key: key);
   @override
   _CategoriesViewState createState() => _CategoriesViewState();
@@ -17,22 +15,55 @@ class CategoriesView extends StatefulWidget {
 
 class _CategoriesViewState extends State<CategoriesView> {
   // ignore: deprecated_member_use
-  var diyetisyenler = List<Diyetisyen>();
-  Diyetisyen diyetisyenModel;
+  List<Diyetisyen> diyetisyenler = new List<Diyetisyen>();
+  final DiyetisyenService diyetisyenService = DiyetisyenService();
+  Diyetisyen diyetisyenModel = Diyetisyen();
 
-  _getDiyetisyen() async {
-    DiyetisyenService.getDiyetisyenler().then((response) {
+  List<Diyetisyen> parseDateBringDiyetisyen(String responseBody) {
+    final parsed =
+        jsonDecode(responseBody.toString()).cast<Map<String, dynamic>>();
+
+    return parsed.map<Diyetisyen>((json) => Diyetisyen.fromJson(json)).toList();
+  }
+
+  Future<List<Diyetisyen>> getDiyetisyen() async {
+    //
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var url = baseUrl +
+        "diyetisyenler" +
+        "?" +
+        "token=" +
+        localStorage.getString("token");
+    await http.get(
+      Uri.parse(url),
+    );
+    var response = await http.get(Uri.parse(url));
+    print('response geliyor : ' + response.body);
+
+    if (response.statusCode == 200) {
+      print('asd');
+      List<dynamic> list = await jsonDecode(response.body);
+
+      list.map((e) {
+        diyetisyenModel = Diyetisyen.fromJson(e);
+        print('ss ' + diyetisyenModel.adi.toString());
+      }).toList();
+
       setState(() {
-        Iterable list = json.decode(response.body);
-        diyetisyenler =
-            list.map((model) => Diyetisyen.fromJson(model)).toList();
+        diyetisyenler = parseDateBringDiyetisyen(response.body);
       });
-    });
+
+      return (json.decode(response.body) as List)
+          .map((e) => Diyetisyen.fromJson(e))
+          .toList();
+    } else {
+      throw Exception('Not Network ${response.statusCode}');
+    }
   }
 
   initState() {
     super.initState();
-    _getDiyetisyen();
+    getDiyetisyen();
     diyetisyenModel = widget.diyetisyenModel;
   }
 

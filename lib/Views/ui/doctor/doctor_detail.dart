@@ -1,21 +1,20 @@
 import 'package:fit_diyet/Views/helpers/size_settings.dart';
 import 'package:fit_diyet/Models/diyetisyen_model.dart';
-import 'package:fit_diyet/Models/doctor_model.dart';
+
 import 'package:fit_diyet/Models/seance_model.dart';
-import 'package:fit_diyet/Views/ui/payment/payment.dart';
+import 'package:fit_diyet/Views/ui/randevu/randevu_al.dart';
+
 import 'package:fit_diyet/Views/widgets/appbar/arrow_back_appbar.dart';
-import 'package:fit_diyet/Views/widgets/seance_list.dart';
+
 
 import 'package:flutter/material.dart';
 
 /// [Detay Sayfası]
 class DiyetisyenListViewDetail extends StatefulWidget {
-  final Doctor doctorModel;
   final Diyetisyen diyetisyen;
   final Seance seanceModel;
 
-  const DiyetisyenListViewDetail(
-      {Key key, this.doctorModel, this.seanceModel, this.diyetisyen})
+  const DiyetisyenListViewDetail({Key key, this.seanceModel, this.diyetisyen})
       : super(key: key);
 
   @override
@@ -24,7 +23,8 @@ class DiyetisyenListViewDetail extends StatefulWidget {
 }
 
 class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
-  Doctor doctorModel;
+  // ignore: deprecated_member_use
+  List<Diyetisyen> diyetisyenler = new List<Diyetisyen>();
   Seance seanceModel;
   Diyetisyen diyetisyenModel;
 
@@ -43,7 +43,6 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
 
   @override
   void initState() {
-    doctorModel = widget.doctorModel;
     seanceModel = widget.seanceModel;
     diyetisyenModel = widget.diyetisyen;
     super.initState();
@@ -95,7 +94,7 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                                     backgroundColor: Colors.green[500],
                                     radius: 40,
                                     backgroundImage: NetworkImage(
-                                      diyetisyenModel.profilFotografi,
+                                      diyetisyenModel.image,
                                     ),
                                   ),
                                 ),
@@ -244,9 +243,17 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                     SizedBox(
                       width: displayWidth(context) * 0.9,
                       child: ElevatedButton(
-                        onPressed: showSeanceDialog,
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => RandevuAyarlari(
+                                dytId: diyetisyenModel.id,
+                              ),
+                            ),
+                          );
+                        },
                         child: Text(
-                          'Seans Ücretleri',
+                          'Randevu Al',
                           style: TextStyle(color: Colors.orange),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -259,24 +266,6 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: displayWidth(context) * 0.9,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Randevu Ücretleri',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          elevation: 10,
-                          primary: Colors.white,
-                          shape: StadiumBorder(),
-                          side: BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 )
               ],
@@ -285,51 +274,5 @@ class _DiyetisyenListViewDetailState extends State<DiyetisyenListViewDetail> {
         ),
       ),
     );
-  }
-
-// *! SHOWDIALOG METOD HERE!
-
-  showSeanceDialog() {
-    showDialog(
-        context: context,
-        builder: (_) => SizedBox(
-              child: AlertDialog(
-                title: new Text("Seanslar"),
-                content: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: seanceList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => PaymentViews(
-                                paymentInfo: seanceModel.month,
-                              ),
-                            ),
-                          );
-                          print("GELEN VERİ => ${seanceModel.month[index]}");
-                        },
-                        child: buildSeancesList(
-                          seanceList[index],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                actions: <Widget>[
-                  ElevatedButton(
-                    child: Text('Kapat'),
-                    onPressed: () {
-                      Navigator.pop(_);
-                    },
-                  )
-                ],
-              ),
-            ));
   }
 }
