@@ -130,10 +130,10 @@ class _DiyetListelerimState extends State<DiyetListelerim> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    // Text(
-                                    //   "Randevu Tarihi: ${randevu.tarih}",
-                                    //   style: TextStyle(color: Colors.white),
-                                    // ),
+                                    Text(
+                                      "ÖNEREN DİYETİSYEN: ${danisan.diyetisyen}",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ],
                                 ),
                               ),
