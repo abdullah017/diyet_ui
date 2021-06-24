@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:fit_diyet/Controllers/diyetisyen_service.dart';
 import 'package:fit_diyet/Models/diyetisyen_model.dart';
-import 'package:fit_diyet/Views/ui/doctor/doctor_detail.dart';
+import 'package:fit_diyet/Views/ui/diyetisyen/diyetisyen_detail.dart';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;

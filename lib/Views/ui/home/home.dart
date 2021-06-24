@@ -3,11 +3,13 @@ import 'package:fit_diyet/Views/helpers/size_settings.dart';
 import 'package:fit_diyet/Models/diyetisyen_model.dart';
 import 'package:fit_diyet/Controllers/diyetisyen_service.dart';
 import 'package:fit_diyet/Views/ui/categories/categories.dart';
-import 'package:fit_diyet/Views/ui/doctor/doctor_detail.dart';
+import 'package:fit_diyet/Views/ui/diyetisyen/diyetisyen_detail.dart';
+import 'package:fit_diyet/Views/ui/drawers/diyet_listelerim.dart';
 import 'package:fit_diyet/Views/ui/drawers/profil_page.dart';
 import 'package:fit_diyet/Views/ui/login_screens/login_views.dart';
 import 'package:fit_diyet/Views/ui/randevu/randevularim.dart';
-import 'package:fit_diyet/Views/widgets/doctor_card.dart';
+import 'package:fit_diyet/Views/widgets/diyetisyen_card.dart';
+
 import 'package:fit_diyet/Views/widgets/drawer/drawer_header.dart';
 import 'package:fit_diyet/Views/widgets/drawer/drawer_item.dart';
 import 'package:http/http.dart' as http;
@@ -161,7 +163,16 @@ class _HomeViewState extends State<HomeView> {
             ),
             Divider(),
             createDrawerItem(icon: Icons.straighten, text: 'Ölçümlerim'),
-            createDrawerItem(icon: Icons.event, text: 'Diyet Listelerim'),
+            createDrawerItem(
+                icon: Icons.event,
+                text: 'Diyet Listelerim',
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DiyetListelerim(),
+                    ),
+                  );
+                }),
             createDrawerItem(icon: Icons.message, text: 'Mesajlarım'),
             createDrawerItem(
                 icon: Icons.exit_to_app, text: 'Çıkış', onTap: logout),
@@ -279,7 +290,7 @@ class _HomeViewState extends State<HomeView> {
                             ),
                           );
                         },
-                        child: DoctorCard(diyetisyen: diyetisyen),
+                        child: DiyetisyenCard(diyetisyen: diyetisyen),
                       );
                     }),
               ),

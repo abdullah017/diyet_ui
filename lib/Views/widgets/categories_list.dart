@@ -1,8 +1,7 @@
-import 'package:fit_diyet/Models/doctor_model.dart';
-
+import 'package:fit_diyet/Models/diyetisyen_model.dart';
 import 'package:flutter/material.dart';
 
-Widget buildCategoriesList(Doctor items) {
+Widget buildCategoriesList(Diyetisyen items) {
   return Card(
     margin: EdgeInsets.all(8.0),
     elevation: 50,
@@ -13,13 +12,13 @@ Widget buildCategoriesList(Doctor items) {
     child: ExpansionTile(
       leading: Icon(Icons.category),
       title: Text(
-        items.specialist,
+        items.kategori,
         style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
       ),
       children: <Widget>[
         ListTile(
           title: Text(
-            items.name,
+            items.adi,
             style: TextStyle(fontWeight: FontWeight.w700),
           ),
         )
