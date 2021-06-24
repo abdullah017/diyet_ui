@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:fit_diyet/Controllers/diyetisyen_service.dart';
 import 'package:fit_diyet/Models/diyetlistesi_model.dart';
-import 'package:fit_diyet/Models/randevu_model.dart';
+
 import 'package:fit_diyet/Views/helpers/size_settings.dart';
 import 'package:fit_diyet/Views/widgets/appbar/arrow_back_appbar.dart';
-import 'package:fit_diyet/Views/widgets/diyetisyen_card.dart';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;

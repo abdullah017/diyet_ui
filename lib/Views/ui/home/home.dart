@@ -6,6 +6,7 @@ import 'package:fit_diyet/Views/ui/categories/categories.dart';
 import 'package:fit_diyet/Views/ui/diyetisyen/diyetisyen_detail.dart';
 import 'package:fit_diyet/Views/ui/drawers/diyet_listelerim.dart';
 import 'package:fit_diyet/Views/ui/drawers/profil_page.dart';
+import 'package:fit_diyet/Views/ui/drawers/tuketilen_besinler.dart';
 import 'package:fit_diyet/Views/ui/login_screens/login_views.dart';
 import 'package:fit_diyet/Views/ui/randevu/randevularim.dart';
 import 'package:fit_diyet/Views/widgets/diyetisyen_card.dart';
@@ -159,7 +160,14 @@ class _HomeViewState extends State<HomeView> {
             ),
             createDrawerItem(
               icon: Icons.format_list_numbered,
-              text: 'Tarfilerim',
+              text: 'Tükettiğim Besinler',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => TuketilenBesinler(),
+                  ),
+                );
+              },
             ),
             Divider(),
             createDrawerItem(icon: Icons.straighten, text: 'Ölçümlerim'),
